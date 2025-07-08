@@ -13,10 +13,10 @@ This project exists because I wanted to learn how a modern game engine works beh
 ### List of features (WIP)
 - [x] CMake cross-platform project structure
 - [ ] Engine subsystems
-    - [ ] Logging
-        - [ ] Levels
-        - [ ] Channels
-        - [ ] Timestamp
+    - [x] Logging
+        - [x] Levels
+        - [x] Channels
+        - [x] Timestamp
     - [ ] Windowing
         - [ ] Window abstraction
         - [ ] Event handling
