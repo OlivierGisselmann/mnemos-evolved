@@ -1,11 +1,11 @@
 #ifndef MNEMOS_HPP
 #define MNEMOS_HPP
 
-#include <iostream>
+#include <debug.hpp>
 
 namespace mnm
 {
-    void TestFunction(int x);
+    
 }
 
 #endif

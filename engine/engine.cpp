@@ -1,9 +1,12 @@
 #include <mnemos.hpp>
+#include <debug.hpp>
 
-namespace mnm
+#include <core/logging/log.hpp>
+
+namespace mnm::debug
 {
-    void TestFunction(int x)
+    void Log(const std::string& message)
     {
-        std::cout << "Hello, world: " << x << '\n';
+        log::Log(log::Level::DEBUG, log::Channel::APPLICATION, message);
     }
 }

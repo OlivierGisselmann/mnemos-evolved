@@ -9,6 +9,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -O2")
 # Create shared library
 add_library(${PROJECT_NAME} SHARED
     engine/engine.cpp
+    engine/core/logging/log.cpp
 )
 
 # Set project version
