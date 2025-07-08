@@ -2,6 +2,10 @@
 
 This project exists because I wanted to learn how a modern game engine works behind the hood. I want to keep external dependencies at a minimum, no SDL/glfw-like libraries are used. Almost everything is done from scratch using C++ 20.
 
+![Build](https://github.com/OlivierGisselmann/mnemos-evolved/actions/workflows/testing.yml/badge.svg)
+![Last Commit](https://img.shields.io/github/last-commit/OlivierGisselmann/mnemos-evolved)
+![License](https://img.shields.io/github/license/OlivierGisselmann/mnemos-evolved)
+
 ## Features
 
 - Minimal external dependencies — pure C++ and system APIs
@@ -117,9 +121,3 @@ Here is a list of useful resources I used for this project:
 - Game Engine Architecture - Third Edition by Jason Gregory
 - Game Programming Patterns - Robert Nystrom
 - Kohi Game Engine series by Travis Vroman
-
----
-
-![License](https://img.shields.io/github/license/OlivierGisselmann/mnemos-evolved)
-![Last Commit](https://img.shields.io/github/last-commit/OlivierGisselmann/mnemos-evolved)
-![Stars](https://img.shields.io/github/stars/OlivierGisselmann/mnemos-evolved?style=social)
