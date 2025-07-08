@@ -1,6 +1,8 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
+#include <chrono>
+#include <format>
 #include <iostream>
 #include <string>
 
@@ -28,6 +30,7 @@ namespace mnm::log
 
     [[nodiscard]] std::string LevelToString(const Level level);
     [[nodiscard]] std::string ChannelToString(const Channel channel);
+    [[nodiscard]] std::string GetTime();
 }
 
 #endif

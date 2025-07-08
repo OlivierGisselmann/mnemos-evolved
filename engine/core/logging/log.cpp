@@ -4,7 +4,7 @@ namespace mnm::log
 {
     void Log(const Level level, const Channel channel, const std::string& message)
     {
-        std::cout << LevelToString(level) << ChannelToString(channel) << " " << message << '\n';
+        std::cout << GetTime() << LevelToString(level) << ChannelToString(channel) << " " << message << '\n';
     }
 
     [[nodiscard]] std::string LevelToString(const Level level)
@@ -31,5 +31,12 @@ namespace mnm::log
         case INPUT:         return "[INPUT]";
         default:            return "[UNKNOWN]";
         }
+    }
+
+    [[nodiscard]] std::string GetTime()
+    {
+        const auto time = std::chrono::current_zone()->to_local(std::chrono::system_clock::now());
+
+        return std::format("[{:%X}]", time);
     }
 }
