@@ -12,6 +12,9 @@ add_library(${PROJECT_NAME} SHARED
     engine/core/logging/log.cpp
 )
 
+# Export additional .lib file for windows symbols
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 # Set project version
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
