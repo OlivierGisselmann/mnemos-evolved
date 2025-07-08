@@ -88,7 +88,7 @@ CrossPlatEngine/
 └── README.md
 ```
 
-## 🧪 Running the Engine
+## Running the Engine
 
 After building, the engine executable will be in the preset-specific `out/{preset}` directory:
 
@@ -119,17 +119,6 @@ Contributions are welcome! Open an issue for discussion before submitting large 
 ## License
 
 GNU General Public License. See `LICENSE` for details.
-
-## 🙋 FAQ
-
-**Q:** Does it support Windows?  
-**A:** Yes, via the `windows-msvc` preset.
-
-**Q:** What graphics API does it use?  
-**A:** None by default, but designed to be extended with OpenGL/Vulkan/DirectX.
-
-**Q:** Can I use it for a real game?  
-**A:** It's meant for learning and experimentation, not production.
 
 ## Credits
 
