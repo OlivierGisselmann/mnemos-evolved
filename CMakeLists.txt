@@ -22,4 +22,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hp
 target_include_directories(${PROJECT_NAME} PRIVATE engine)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
+# Add application subfolder
 add_subdirectory(application)
