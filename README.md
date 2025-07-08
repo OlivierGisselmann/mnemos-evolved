@@ -1,6 +1,6 @@
 # Mnemos Evolved
 
-This project exists because I wanted to learn how a modern game engine works behind the hood. I want to keep external dependencies at a minimum, no SDL or glfw libraries are used. Almost everything is done from scratch using C++ 20.
+This project exists because I wanted to learn how a modern game engine works behind the hood. I want to keep external dependencies at a minimum, no SDL/glfw-like libraries are used. Almost everything is done from scratch using C++ 20.
 
 ## Features
 
