@@ -102,16 +102,6 @@ After building, the engine executable will be in the preset-specific `out/{prese
 
 I want to keep this project with minimal dependencies. For now, the only external libraries used are OS-specific APIs (e.g. window system).
 
-## Testing
-
-If you add tests, you can run them like this (example):
-
-```bash
-cmake --preset test
-cmake --build --preset test
-ctest --preset test
-```
-
 ## Contributing
 
 Contributions are welcome! Open an issue for discussion before submitting large changes.
