@@ -1,11 +1,9 @@
 #ifndef DEBUG_HPP
 #define DEBUG_HPP
 
-#include <string>
-
 namespace mnm::debug
 {
-    void Log(const std::string& message) noexcept;
+    void Log(const char* message) noexcept;
 }
 
 #endif

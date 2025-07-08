@@ -5,7 +5,7 @@
 
 namespace mnm::debug
 {
-    void Log(const std::string& message) noexcept
+    void Log(const char* message) noexcept
     {
         log::Log(log::Level::DEBUG, log::Channel::APPLICATION, message);
     }
