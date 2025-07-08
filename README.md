@@ -2,6 +2,8 @@
 
 This project exists because I wanted to learn how a modern game engine works behind the hood. I want to keep external dependencies at a minimum, no SDL/glfw-like libraries are used. Almost everything is done from scratch using C++ 20.
 
+<img src="logo.png" width="200" height="200">
+
 ![Build](https://github.com/OlivierGisselmann/mnemos-evolved/actions/workflows/testing.yml/badge.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/OlivierGisselmann/mnemos-evolved)
 ![License](https://img.shields.io/github/license/OlivierGisselmann/mnemos-evolved)
