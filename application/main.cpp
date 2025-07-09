@@ -1,8 +1,11 @@
 #include <mnemos.hpp>
+#include "game.hpp"
 
 int main(int argc, char** argv)
 {
-    mnm::debug::Log("Debug logging from application");
+    game::Game gameApp;
+
+    mnm::Run(&gameApp);
 
     return 0;
 }

@@ -3,6 +3,7 @@ project(Application)
 # Create executable from sources
 add_executable(${PROJECT_NAME}
     main.cpp
+    game.cpp
 )
 
 # Link Mnemos against the executable
