@@ -3,7 +3,7 @@
 
 namespace mnm
 {
-    class MnemosApplication
+    class MAPI MnemosApplication
     {
     public:
         virtual void OnInit() = 0;
