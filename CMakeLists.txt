@@ -14,7 +14,7 @@ add_library(${PROJECT_NAME} SHARED
 
 # Export additional .lib file for windows symbols
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-set(MEXPORT ON)
+add_definitions(-DMEXPORT)
 
 # Set project version
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
