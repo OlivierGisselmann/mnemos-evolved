@@ -3,6 +3,21 @@
 
 #include <core/logging/log.hpp>
 
+namespace mnm
+{
+    /* MAIN ENGINE LOOP */
+    void Run(MnemosApplication* app) noexcept
+    {
+        app->OnInit();
+
+        app->OnUpdate();
+
+        app->OnFixedUpdate();
+
+        app->OnShutdown();
+    }
+}
+
 namespace mnm::debug
 {
     void Log(const char* message) noexcept
