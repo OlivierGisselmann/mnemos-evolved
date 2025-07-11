@@ -23,9 +23,9 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [x] Levels
         - [x] Channels
         - [x] Timestamp
-    - [ ] Game loop
-        - [ ] Fixed timestep update
-        - [ ] Variable timestep update
+    - [x] Game loop
+        - [x] Fixed timestep update
+        - [x] Variable timestep update
     - [ ] Windowing
         - [ ] Window abstraction
         - [ ] Event handling
