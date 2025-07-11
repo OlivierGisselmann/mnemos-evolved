@@ -23,6 +23,9 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [x] Levels
         - [x] Channels
         - [x] Timestamp
+    - [ ] Game loop
+        - [ ] Fixed timestep update
+        - [ ] Variable timestep update
     - [ ] Windowing
         - [ ] Window abstraction
         - [ ] Event handling
@@ -60,7 +63,7 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Rigidbodies
         - [ ] Raycasting
     - [ ] Audio
-- [ ] Application lifecycle management
+- [x] Application lifecycle management
 
 ## Build Instructions
 
