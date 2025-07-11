@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME} SHARED
     engine/engine.cpp
     engine/core/logging/log.cpp
     engine/core/timer/timer.cpp
+    engine/debug/debug.cpp
 )
 
 # Export additional .lib file for windows symbols

@@ -1,5 +1,4 @@
 #include <mnemos.hpp>
-#include <debug.hpp>
 
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
@@ -36,13 +35,5 @@ namespace mnm
 
         // TODO - Shutdown engine
         app->OnShutdown();
-    }
-}
-
-namespace mnm::debug
-{
-    void Log(const char* message) noexcept
-    {
-        log::Log(log::Level::DEBUG, log::Channel::APPLICATION, message);
     }
 }
