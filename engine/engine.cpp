@@ -6,7 +6,7 @@
 namespace mnm
 {
     /* MAIN ENGINE LOOP */
-    void Run(MnemosApplication* app) noexcept
+    void Run(const std::unique_ptr<MnemosApplication>& app) noexcept
     {
         app->OnInit();
 

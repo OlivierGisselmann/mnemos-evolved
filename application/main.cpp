@@ -3,9 +3,7 @@
 
 int main(int argc, char** argv)
 {
-    game::Game gameApp;
-
-    mnm::Run(&gameApp);
+    mnm::Run(std::make_unique<game::Game>());
 
     return 0;
 }

@@ -3,6 +3,8 @@
 
 #include <mnemos.hpp>
 
+#include <memory>
+
 namespace game
 {
     class Game : public mnm::MnemosApplication
