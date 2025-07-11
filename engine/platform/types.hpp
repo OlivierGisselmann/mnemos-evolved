@@ -2,6 +2,7 @@
 #define TYPES_HPP
 
 #include <cstdint>
+#include <cstddef>
 
 namespace mnm
 {
