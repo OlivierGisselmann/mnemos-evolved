@@ -9,7 +9,7 @@ namespace game
 
     void Game::OnUpdate()
     {
-        mnm::debug::Log("Game OnUpdate()");
+        // mnm::debug::Log("Game OnUpdate()");
     }
 
     void Game::OnFixedUpdate()
