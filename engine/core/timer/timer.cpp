@@ -1,9 +1,11 @@
 #include <core/timer/timer.hpp>
 
-static auto old = std::chrono::steady_clock::now();
-
 namespace mnm::timer
 {
+    static auto old = std::chrono::steady_clock::now();
+    static auto frameCount = 0;
+    static auto fixedUpdateCount = 0;
+
     // Get delta time in nanoseconds (using integer to avoid floating point inaccuracies)
     u64 GetDeltaTime()
     {
@@ -24,5 +26,25 @@ namespace mnm::timer
         const auto now = std::chrono::steady_clock::now();
 
         return std::chrono::duration(now - old).count();
+    }
+
+    void CountFrame()
+    {
+        ++frameCount;
+    }
+
+    u64 GetFrameCount()
+    {
+        return frameCount;
+    }
+
+    void CountFixedUpdate()
+    {
+        ++fixedUpdateCount;
+    }
+
+    u64 GetFixedUpdateCount()
+    {
+        return fixedUpdateCount;
     }
 }

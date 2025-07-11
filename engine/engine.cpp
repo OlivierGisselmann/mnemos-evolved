@@ -3,7 +3,7 @@
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
 
-constexpr auto fixedUpdateRate = 10.0f;
+constexpr auto fixedUpdateRate = 60.0f;
 
 namespace mnm
 {
@@ -13,7 +13,7 @@ namespace mnm
         // TODO - Initialize engine
         app->OnInit();
 
-        f32 accumulator = 0;
+        u64 accumulator = 0;
 
         while(true)
         {
@@ -27,10 +27,12 @@ namespace mnm
             while(accumulator > 1.0f / (fixedUpdateRate / 1e9))
             {
                 app->OnFixedUpdate();
+                timer::CountFixedUpdate();
                 accumulator -= 1.0f / (fixedUpdateRate / 1e9);
             }
             
             // TODO - Render frame
+            timer::CountFrame();
         }
 
         // TODO - Shutdown engine

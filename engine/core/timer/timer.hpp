@@ -9,7 +9,12 @@ namespace mnm::timer
 {
     u64 GetDeltaTime();
     u64 GetTotalTime();
-    i32 GetFrameCount();
+
+    u64 GetFrameCount();
+    void CountFrame();
+
+    u64 GetFixedUpdateCount();
+    void CountFixedUpdate();
 }
 
 #endif
