@@ -14,8 +14,9 @@ namespace mnm
         app->OnInit();
 
         u64 accumulator = 0;
+        bool quit = false;
 
-        while(true)
+        while(!quit)
         {
             // TODO - Poll input events
 
@@ -33,6 +34,10 @@ namespace mnm
             
             // TODO - Render frame
             timer::CountFrame();
+
+            // Temporary loop exit
+            if(timer::GetFixedUpdateCount() > 600)
+                quit = true;
         }
 
         // TODO - Shutdown engine
