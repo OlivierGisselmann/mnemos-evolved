@@ -2,8 +2,8 @@ project(Application)
 
 # Create executable from sources
 add_executable(${PROJECT_NAME}
-    main.cpp
-    game.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/game.cpp
 )
 
 # Link Mnemos against the executable

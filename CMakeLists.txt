@@ -1,17 +1,22 @@
+# Project settings
 cmake_minimum_required(VERSION 3.25)
-
+cmake_policy(VERSION 3.18)
 project(MnemosEvolved VERSION 0.0.1 DESCRIPTION "Mnemos Engine Rewrite")
+enable_language(C)
+enable_language(CXX)
 
 # Set language standard
+set(CMAKE_SUPPRESS_REGENERATION ON)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -O2")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED
-    engine/engine.cpp
-    engine/core/logging/log.cpp
-    engine/core/timer/timer.cpp
-    engine/debug/debug.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
 )
 
 # Export additional .lib file for windows symbols
