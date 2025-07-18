@@ -1,0 +1,27 @@
+name: Linux Build
+
+on:
+  push:
+    branches:  [ "main" ]
+  pull_request:
+    branches:  [ "main" ]
+
+jobs:
+  build:
+    runs-on: [ self-hosted, linux ]
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        build_type: [ debug, release ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run:
+        cmake --preset ${matrix.build_type}-linux
+
+    - name: Build
+      run: cmake --build --preset app-${matrix.build_type}-linux
