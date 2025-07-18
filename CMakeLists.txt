@@ -18,7 +18,7 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/window/win32/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
     )
 
     # Export additional .lib file for windows symbols
@@ -42,7 +42,7 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/window/x11/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
     )
 
     add_definitions(-DMEXPORT)
