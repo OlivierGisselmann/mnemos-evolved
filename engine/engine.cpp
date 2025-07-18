@@ -2,6 +2,7 @@
 
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
+#include <platform/window/window.hpp>
 
 constexpr auto fixedUpdateRate = 60.0f;
 
@@ -10,15 +11,21 @@ namespace mnm
     /* MAIN ENGINE LOOP */
     void Run(const std::unique_ptr<MnemosApplication>& app) noexcept
     {
+        window::MWindow window;
+        window.Initialize(1280, 720, "Mnemos Evolved");
+
         // TODO - Initialize engine
         app->OnInit();
 
+        // Loop values initialization
         u64 accumulator = 0;
         bool quit = false;
 
         while(!quit)
         {
             // TODO - Poll input events
+            window.PollEvents();
+            quit = window.CloseRequested();
 
             // TODO - Update engine state
             app->OnUpdate();
@@ -33,6 +40,7 @@ namespace mnm
             }
             
             // TODO - Render frame
+            window.SwapBuffers();
             timer::CountFrame();
 
             // Temporary loop exit
