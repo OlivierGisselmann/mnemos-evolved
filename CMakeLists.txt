@@ -36,6 +36,9 @@ if(PLATFORM_WINDOWS)
     target_include_directories(${PROJECT_NAME} PRIVATE engine)
     target_include_directories(${PROJECT_NAME} PRIVATE include)
 elseif(PLATFORM_LINUX)
+    # Fetch required packages
+    find_package(X11 REQUIRED)
+
     # Create shared library
     add_library(${PROJECT_NAME} SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
@@ -57,6 +60,7 @@ elseif(PLATFORM_LINUX)
     # Include sources and public API to avoid relative paths
     target_include_directories(${PROJECT_NAME} PRIVATE engine)
     target_include_directories(${PROJECT_NAME} PRIVATE include)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES})
 endif()
 
 # Add application subfolder
