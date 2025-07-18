@@ -11,18 +11,15 @@ namespace mnm
     /* MAIN ENGINE LOOP */
     void Run(const std::unique_ptr<MnemosApplication>& app) noexcept
     {
+        // Subsystems initialization
         window::MWindow window;
         window.Initialize(1280, 720, "Mnemos Evolved");
 
-        // TODO - Initialize engine
         app->OnInit();
 
-        // Loop values initialization
         u64 accumulator = 0;
-
         while(!window.CloseRequested())
         {
-            // TODO - Poll input events
             window.PollEvents();
 
             // TODO - Update engine state
@@ -42,7 +39,9 @@ namespace mnm
             timer::CountFrame();
         }
 
-        // TODO - Shutdown engine
+        // Engine shutdown
         app->OnShutdown();
+
+        window.Shutdown();
     }
 }

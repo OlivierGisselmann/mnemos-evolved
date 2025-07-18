@@ -10,6 +10,7 @@
 
 namespace mnm::window
 {
+    // Forward declaration - implementation defined
     struct MWindowContext;
 
     class MWindow
