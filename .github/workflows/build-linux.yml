@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure CMake
       run:
-        cmake --preset ${matrix.build_type}-linux
+        cmake --preset ${{matrix.build_type}}-linux
 
     - name: Build
-      run: cmake --build --preset app-${matrix.build_type}-linux
+      run: cmake --build --preset app-${{matrix.build_type}}-linux

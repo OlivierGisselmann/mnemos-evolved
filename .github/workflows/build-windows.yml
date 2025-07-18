@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure CMake
       run:
-        cmake --preset ${matrix.build_type}-windows
+        cmake --preset ${{matrix.build_type}}-windows
 
     - name: Build
-      run: cmake --build --preset app-${matrix.build_type}-windows
+      run: cmake --build --preset app-${{matrix.build_type}}-windows
