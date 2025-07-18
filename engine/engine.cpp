@@ -19,13 +19,11 @@ namespace mnm
 
         // Loop values initialization
         u64 accumulator = 0;
-        bool quit = false;
 
-        while(!quit)
+        while(!window.CloseRequested())
         {
             // TODO - Poll input events
             window.PollEvents();
-            quit = window.CloseRequested();
 
             // TODO - Update engine state
             app->OnUpdate();
@@ -42,10 +40,6 @@ namespace mnm
             // TODO - Render frame
             window.SwapBuffers();
             timer::CountFrame();
-
-            // Temporary loop exit
-            if(timer::GetFixedUpdateCount() > 600)
-                quit = true;
         }
 
         // TODO - Shutdown engine

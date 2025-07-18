@@ -14,7 +14,7 @@ namespace game
 
     void Game::OnFixedUpdate()
     {
-        mnm::debug::Log("Game OnFixedUpdate()");
+        //mnm::debug::Log("Game OnFixedUpdate()");
     }
 
     void Game::OnShutdown()
