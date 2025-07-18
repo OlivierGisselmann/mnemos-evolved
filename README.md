@@ -4,7 +4,8 @@ This project exists because I wanted to learn how a modern game engine works beh
 
 <img src="logo.png" width="200" height="200">
 
-![Build](https://github.com/OlivierGisselmann/mnemos-evolved/actions/workflows/testing.yml/badge.svg)
+![LinuxBuild](https://github.com/OlivierGisselmann/mnemos-evolved/actions/workflows/build-linux.yml/badge.svg)
+![WindowsBuild](https://github.com/OlivierGisselmann/mnemos-evolved/actions/workflows/build-windows.yml/badge.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/OlivierGisselmann/mnemos-evolved)
 ![License](https://img.shields.io/github/license/OlivierGisselmann/mnemos-evolved)
 
