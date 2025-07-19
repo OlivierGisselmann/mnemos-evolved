@@ -1,7 +1,7 @@
 #ifndef TIMER_HPP
 #define TIMER_HPP
 
-#include <platform/types.hpp>
+#include <types.hpp>
 
 #include <chrono>
 

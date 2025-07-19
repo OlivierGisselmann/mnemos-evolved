@@ -2,7 +2,7 @@
 #define WINDOW_HPP
 
 #include <core/logging/log.hpp>
-#include <platform/types.hpp>
+#include <types.hpp>
 
 #include <iostream>
 #include <memory>
