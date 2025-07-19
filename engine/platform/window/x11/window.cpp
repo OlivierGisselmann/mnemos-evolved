@@ -89,6 +89,8 @@ namespace mnm::window
     {
         XDestroyWindow(mContext->display, mContext->window);
         XCloseDisplay(mContext->display);
+
+        log::Log(log::Level::INFO, log::Channel::WINDOW, "X11 Window shutdown");
     }
 
     bool MWindow::CloseRequested() const

@@ -32,13 +32,11 @@
         {
             "name": "windows",
             "hidden": true,
+            "generator": "Visual Studio 17 2022",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
                 "PLATFORM_WINDOWS": true,
                 "PLATFORM_LINUX": false
             },
-            "generator": "Visual Studio 17 2022",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
