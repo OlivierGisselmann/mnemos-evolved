@@ -111,7 +111,6 @@ namespace mnm::window
         XSetWMProtocols(mContext->display, mContext->window, &mContext->deleteWindowAtom, 1);
 
         // Set input masks and window title
-        XSelectInput(mContext->display, mContext->window, ExposureMask | KeyPressMask);
         XStoreName(mContext->display, mContext->window, mTitle.c_str());
 
         // Show the window
@@ -151,7 +150,12 @@ namespace mnm::window
             return false;
         }
 
+        std::string renderer = (const char*)glGetString(GL_RENDERER);
+        std::string version = (const char*)glGetString(GL_VERSION);
+
         log::Log(log::Level::INFO, log::Channel::WINDOW, "X11 Window initialized");
+        log::Log(log::Level::INFO, log::Channel::WINDOW, "Selected GPU: " + renderer);
+        log::Log(log::Level::INFO, log::Channel::WINDOW, "GL Version: " + version);
 
         return true;
     }
@@ -186,8 +190,20 @@ namespace mnm::window
                 switch (mContext->event.type)
                 {
                 case DestroyNotify:
+                {
                     mCloseRequested = true;
                     break;
+                }
+                case ConfigureNotify:
+                {
+                    XConfigureEvent xce = mContext->event.xconfigure;
+                    if(xce.width != mWidth || xce.height != mHeight)
+                    {
+                        mWidth = xce.width;
+                        mHeight = xce.height;
+                    }
+                    break;
+                }
                 default:
                     XFlush(mContext->display);
                     break;
