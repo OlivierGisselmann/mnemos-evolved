@@ -6,6 +6,12 @@
 #include <iostream>
 #include <string>
 
+#define LOG(message)    Log(mnm::log::Level::DEBUG, mnm::log::Channel::GLOBAL, message)
+#define LOG_INFO(message)    Log(mnm::log::Level::INFO, mnm::log::Channel::GLOBAL, message)
+#define LOG_WARN(message)    Log(mnm::log::Level::WARNmnm::log::Channel::GLOBAL, message)
+#define LOG_ERR(message)    Log(mnm::log::Level::ERR, mnm::log::Channel::GLOBAL, message)
+#define LOG_FATAL(message)    Log(mnm::log::Level::FATAL, mnm::log::Channel::GLOBAL, message)
+
 namespace mnm::log
 {
     enum Level
