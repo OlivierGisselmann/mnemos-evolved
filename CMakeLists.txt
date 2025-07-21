@@ -12,6 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(PLATFORM_WINDOWS)
+    # Fetch required packages
+    find_package(OpenGL REQUIRED)
+
     # Create shared library
     add_library(${PROJECT_NAME} SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
@@ -35,9 +38,11 @@ if(PLATFORM_WINDOWS)
     # Include sources and public API to avoid relative paths
     target_include_directories(${PROJECT_NAME} PRIVATE engine)
     target_include_directories(${PROJECT_NAME} PRIVATE include)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 elseif(PLATFORM_LINUX)
     # Fetch required packages
     find_package(X11 REQUIRED)
+    find_package(OpenGL REQUIRED)
 
     # Create shared library
     add_library(${PROJECT_NAME} SHARED
@@ -60,7 +65,7 @@ elseif(PLATFORM_LINUX)
     # Include sources and public API to avoid relative paths
     target_include_directories(${PROJECT_NAME} PRIVATE engine)
     target_include_directories(${PROJECT_NAME} PRIVATE include)
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES} ${OPENGL_LIBRARIES}))
 endif()
 
 # Add application subfolder
