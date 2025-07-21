@@ -22,6 +22,7 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
     )
 
     # Export additional .lib file for windows symbols
@@ -36,8 +37,7 @@ if(PLATFORM_WINDOWS)
     set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hpp)
 
     # Include sources and public API to avoid relative paths
-    target_include_directories(${PROJECT_NAME} PRIVATE engine)
-    target_include_directories(${PROJECT_NAME} PRIVATE include)
+    target_include_directories(${PROJECT_NAME} PRIVATE engine include vendor)
     target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 elseif(PLATFORM_LINUX)
     # Fetch required packages
@@ -51,6 +51,7 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
     )
 
     add_definitions(-DMEXPORT)
@@ -63,9 +64,8 @@ elseif(PLATFORM_LINUX)
     set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hpp)
 
     # Include sources and public API to avoid relative paths
-    target_include_directories(${PROJECT_NAME} PRIVATE engine)
-    target_include_directories(${PROJECT_NAME} PRIVATE include)
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES} ${OPENGL_LIBRARIES}))
+    target_include_directories(${PROJECT_NAME} PRIVATE engine include vendor)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES} ${OPENGL_LIBRARIES})
 endif()
 
 # Add application subfolder
