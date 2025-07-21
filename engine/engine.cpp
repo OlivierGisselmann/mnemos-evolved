@@ -4,7 +4,7 @@
 #include <core/timer/timer.hpp>
 #include <platform/window/window.hpp>
 
-constexpr auto fixedUpdateRate = 60.0f;
+constexpr auto FIXED_UPDATE_RATE = 60.0f;
 
 namespace mnm
 {
@@ -23,20 +23,19 @@ namespace mnm
             window.PollEvents();
 
             // TODO - Update engine state
+            timer::UpdateTimer();
             app->OnUpdate();
 
             // Fixed timestep update
             accumulator += timer::GetDeltaTime();
-            while(accumulator > 1.0f / (fixedUpdateRate / 1e9))
+            while(accumulator > 1.0f / (FIXED_UPDATE_RATE / 1e9))
             {
                 app->OnFixedUpdate();
-                timer::CountFixedUpdate();
-                accumulator -= 1.0f / (fixedUpdateRate / 1e9);
+                accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
             }
             
             // TODO - Render frame
             window.SwapBuffers();
-            timer::CountFrame();
         }
 
         // Engine shutdown

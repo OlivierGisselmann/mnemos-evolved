@@ -7,14 +7,10 @@
 
 namespace mnm::timer
 {
-    u64 GetDeltaTime();
-    u64 GetTotalTime();
+    void UpdateTimer();
 
-    u64 GetFrameCount();
-    void CountFrame();
-
-    u64 GetFixedUpdateCount();
-    void CountFixedUpdate();
+    [[nodiscard]] const u64 GetDeltaTime();
+    [[nodiscard]] const u64 GetTotalTime();
 }
 
 #endif

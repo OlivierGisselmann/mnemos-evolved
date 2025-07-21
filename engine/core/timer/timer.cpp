@@ -6,45 +6,28 @@ namespace mnm::timer
     static auto frameCount = 0;
     static auto fixedUpdateCount = 0;
 
-    // Get delta time in nanoseconds (using integer to avoid floating point inaccuracies)
-    u64 GetDeltaTime()
-    {
-        const auto now = std::chrono::steady_clock::now();
+    static u64 totalTime = 0, deltaTime = 0;
 
-        const auto delta = std::chrono::duration(now - old).count();
-
-        old = now;
-
-        return delta;
-    }
-
-    // Get total time in nanoseconds (using integer to avoid floating point inaccuracies)
-    u64 GetTotalTime()
+    void UpdateTimer()
     {
         static const auto start = std::chrono::steady_clock::now();
 
         const auto now = std::chrono::steady_clock::now();
+        deltaTime = std::chrono::duration(now - old).count();
+        totalTime = std::chrono::duration(now - start).count();
 
-        return std::chrono::duration(now - old).count();
+        old = now;
     }
 
-    void CountFrame()
+    // Get delta time in nanoseconds (using integer to avoid floating point inaccuracies)
+    [[nodiscard]] const u64 GetDeltaTime()
     {
-        ++frameCount;
+        return deltaTime;
     }
 
-    u64 GetFrameCount()
+    // Get total time in nanoseconds (using integer to avoid floating point inaccuracies)
+    [[nodiscard]] const u64 GetTotalTime()
     {
-        return frameCount;
-    }
-
-    void CountFixedUpdate()
-    {
-        ++fixedUpdateCount;
-    }
-
-    u64 GetFixedUpdateCount()
-    {
-        return fixedUpdateCount;
+        return totalTime;
     }
 }
