@@ -1,6 +1,8 @@
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
+#include <defines.hpp>
+
 namespace mnm
 {
     class MAPI MnemosApplication
