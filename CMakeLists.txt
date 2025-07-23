@@ -24,6 +24,7 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer.cpp
     )
 
     # Export additional .lib file for windows symbols
@@ -54,6 +55,7 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer.cpp
     )
 
     add_definitions(-DMEXPORT)

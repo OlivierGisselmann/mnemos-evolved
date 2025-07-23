@@ -3,8 +3,7 @@
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
 #include <platform/window/window.hpp>
-
-#include <glad/glad.h>
+#include <renderer/renderer.hpp>
 
 constexpr auto FIXED_UPDATE_RATE = 60.0f;
 
@@ -16,6 +15,7 @@ namespace mnm
         // Subsystems initialization
         window::MWindow window;
         window.Initialize(1280, 720, "Mnemos Evolved");
+        renderer::InitRenderer();
 
         app->OnInit();
 
@@ -23,9 +23,6 @@ namespace mnm
         while(!window.CloseRequested())
         {
             window.PollEvents();
-
-            glClearColor(0.9f, 0.3f, 0.4f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
 
             // TODO - Update engine state
             timer::UpdateTimer();
@@ -40,6 +37,10 @@ namespace mnm
             }     
             
             // TODO - Render frame
+            renderer::BeginFrame();
+            renderer::RenderFrame();
+            renderer::EndFrame();
+
             window.SwapBuffers();
             input::UpdateInputState();
         }
