@@ -88,7 +88,7 @@ cmake --build --preset app-debug-linux
 ## Project Structure
 
 ```
-CrossPlatEngine/
+MnemosEvolved/
 ├── application/         # Application source files
 ├── engine/              # Engine sources
 ├── include/             # Public headers
