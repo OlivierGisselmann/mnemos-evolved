@@ -3,6 +3,7 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 #include <X11/Xutil.h>
+#include <X11/keysym.h>
 #include <glad/glad.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
@@ -12,6 +13,81 @@ typedef GLXContext (*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXC
 
 namespace mnm::window
 {
+    static input::Key TranslateX11Key(KeySym sym)
+    {
+        switch (sym)
+        {
+            case XK_a: return input::Key::A;
+            case XK_b: return input::Key::B;
+            case XK_c: return input::Key::C;
+            case XK_d: return input::Key::D;
+            case XK_e: return input::Key::E;
+            case XK_f: return input::Key::F;
+            case XK_g: return input::Key::G;
+            case XK_h: return input::Key::H;
+            case XK_i: return input::Key::I;
+            case XK_j: return input::Key::J;
+            case XK_k: return input::Key::K;
+            case XK_l: return input::Key::L;
+            case XK_m: return input::Key::M;
+            case XK_n: return input::Key::N;
+            case XK_o: return input::Key::O;
+            case XK_p: return input::Key::P;
+            case XK_q: return input::Key::Q;
+            case XK_r: return input::Key::R;
+            case XK_s: return input::Key::S;
+            case XK_t: return input::Key::T;
+            case XK_u: return input::Key::U;
+            case XK_v: return input::Key::V;
+            case XK_w: return input::Key::W;
+            case XK_x: return input::Key::X;
+            case XK_y: return input::Key::Y;
+            case XK_z: return input::Key::Z;
+
+            case XK_F1: return input::Key::F1;
+            case XK_F2: return input::Key::F2;
+            case XK_F3: return input::Key::F3;
+            case XK_F4: return input::Key::F4;
+            case XK_F5: return input::Key::F5;
+            case XK_F6: return input::Key::F6;
+            case XK_F7: return input::Key::F7;
+            case XK_F8: return input::Key::F8;
+            case XK_F9: return input::Key::F9;
+            case XK_F10: return input::Key::F10;
+            case XK_F11: return input::Key::F11;
+            case XK_F12: return input::Key::F12;
+
+            case XK_0: return input::Key::Alpha0;
+            case XK_1: return input::Key::Alpha1;
+            case XK_2: return input::Key::Alpha2;
+            case XK_3: return input::Key::Alpha3;
+            case XK_4: return input::Key::Alpha4;
+            case XK_5: return input::Key::Alpha5;
+            case XK_6: return input::Key::Alpha6;
+            case XK_7: return input::Key::Alpha7;
+            case XK_8: return input::Key::Alpha8;
+            case XK_9: return input::Key::Alpha9;
+
+            case XK_KP_0: return input::Key::Numpad0;
+            case XK_KP_1: return input::Key::Numpad1;
+            case XK_KP_2: return input::Key::Numpad2;
+            case XK_KP_3: return input::Key::Numpad3;
+            case XK_KP_4: return input::Key::Numpad4;
+            case XK_KP_5: return input::Key::Numpad5;
+            case XK_KP_6: return input::Key::Numpad6;
+            case XK_KP_7: return input::Key::Numpad7;
+            case XK_KP_8: return input::Key::Numpad8;
+            case XK_KP_9: return input::Key::Numpad9;
+
+            case XK_space: return input::Key::Space;
+            case XK_Escape: return input::Key::Escape;
+            case XK_BackSpace: return input::Key::Backspace;
+            case XK_Return: return input::Key::Return;
+            
+            default: return input::Key::Count;
+        }
+    }
+
     // Platform specific internal state
     struct MWindowContext
     {
@@ -110,7 +186,8 @@ namespace mnm::window
         mContext->deleteWindowAtom = XInternAtom(mContext->display, "WM_DELETE_WINDOW", False);
         XSetWMProtocols(mContext->display, mContext->window, &mContext->deleteWindowAtom, 1);
 
-        // Set input masks and window title
+        // Disable input key repeat and set window title
+        XAutoRepeatOff(mContext->display);
         XStoreName(mContext->display, mContext->window, mTitle.c_str());
 
         // Show the window
@@ -202,6 +279,18 @@ namespace mnm::window
                         mWidth = xce.width;
                         mHeight = xce.height;
                     }
+                    break;
+                }
+                case KeyPress:
+                {
+                    KeySym sym = XLookupKeysym(&mContext->event.xkey, 0);
+                    input::SetKeyState(TranslateX11Key(sym), true);
+                    break;
+                }
+                case KeyRelease:
+                {
+                    KeySym sym = XLookupKeysym(&mContext->event.xkey, 0);
+                    input::SetKeyState(TranslateX11Key(sym), false);
                     break;
                 }
                 default:

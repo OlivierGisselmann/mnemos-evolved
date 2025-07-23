@@ -21,6 +21,7 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
     )
@@ -50,6 +51,7 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
     )

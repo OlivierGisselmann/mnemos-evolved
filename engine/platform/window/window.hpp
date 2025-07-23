@@ -2,6 +2,9 @@
 #define WINDOW_HPP
 
 #include <core/logging/log.hpp>
+#include <platform/input/input_system.hpp>
+
+#include <input.hpp>
 #include <types.hpp>
 
 #include <iostream>

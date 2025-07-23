@@ -42,6 +42,7 @@ namespace mnm
             
             // TODO - Render frame
             window.SwapBuffers();
+            input::UpdateInputState();
         }
 
         // Engine shutdown
