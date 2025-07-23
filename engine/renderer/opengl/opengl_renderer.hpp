@@ -10,6 +10,7 @@ namespace mnm::renderer
     class OpenGLRenderer : public IRenderer
     {
     public:
+        void Initialize() override;
         void BeginFrame() override;
         void DrawFrame() override;
         void EndFrame() override;

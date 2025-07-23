@@ -15,7 +15,9 @@ namespace mnm
         // Subsystems initialization
         window::MWindow window;
         window.Initialize(1280, 720, "Mnemos Evolved");
+
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
+        renderer->Initialize();
 
         app->OnInit();
 
@@ -34,7 +36,6 @@ namespace mnm
             {
                 app->OnFixedUpdate();
                 accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
-                LOG("Fixed Update");
             }     
             
             // Render frame
