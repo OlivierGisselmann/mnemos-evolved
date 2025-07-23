@@ -2,7 +2,7 @@
 
 namespace mnm::renderer
 {
-    std::unique_ptr<IRenderer> RendererFactory::Create(RendererBackend backend)
+    std::unique_ptr<IRenderer> CreateRenderer(RendererBackend backend)
     {
         switch (backend)
         {
