@@ -6,15 +6,15 @@ namespace mnm::renderer
     {
         switch (backend)
         {
-        case OpenGL:
+        case RendererBackend::OpenGL:
         {
             return std::make_unique<OpenGLRenderer>();
         }
-        case Vulkan:
+        case RendererBackend::Vulkan:
         {
             return std::make_unique<OpenGLRenderer>(); // Temporary
         }
-        case DirectX:
+        case RendererBackend::DirectX:
         {
             return std::make_unique<OpenGLRenderer>(); // Temporary
         }

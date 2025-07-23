@@ -8,7 +8,7 @@
 
 namespace mnm::renderer
 {
-    enum RendererBackend
+    enum class RendererBackend
     {
         OpenGL,
         Vulkan,

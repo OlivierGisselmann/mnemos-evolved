@@ -15,7 +15,7 @@ namespace mnm
         // Subsystems initialization
         window::MWindow window;
         window.Initialize(1280, 720, "Mnemos Evolved");
-        auto renderer = renderer::RendererFactory::Create(renderer::OpenGL);
+        auto renderer = renderer::RendererFactory::Create(renderer::RendererBackend::OpenGL);
 
         app->OnInit();
 
