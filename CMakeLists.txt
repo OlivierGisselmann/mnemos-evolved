@@ -11,6 +11,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Ensure DLL is next to executable
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
 if(PLATFORM_WINDOWS)
     # Fetch required packages
     find_package(OpenGL REQUIRED)
@@ -29,8 +33,6 @@ if(PLATFORM_WINDOWS)
 
     # Export additional .lib file for windows symbols
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     add_definitions(-DMEXPORT)
 
     # Set project version
@@ -60,8 +62,6 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer.cpp
     )
 
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     add_definitions(-DMEXPORT)
 
     # Set project version
