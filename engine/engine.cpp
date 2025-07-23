@@ -37,8 +37,7 @@ namespace mnm
             {
                 app->OnFixedUpdate();
                 accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
-            }
-            
+            }     
             
             // TODO - Render frame
             window.SwapBuffers();
