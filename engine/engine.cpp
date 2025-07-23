@@ -3,7 +3,7 @@
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
 #include <platform/window/window.hpp>
-#include <renderer/renderer.hpp>
+#include <renderer/renderer_factory.hpp>
 
 constexpr auto FIXED_UPDATE_RATE = 60.0f;
 
@@ -15,7 +15,7 @@ namespace mnm
         // Subsystems initialization
         window::MWindow window;
         window.Initialize(1280, 720, "Mnemos Evolved");
-        renderer::InitRenderer();
+        auto renderer = renderer::RendererFactory::Create(renderer::OpenGL);
 
         app->OnInit();
 
@@ -36,9 +36,9 @@ namespace mnm
                 accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
             }     
             
-            renderer::BeginFrame();
-            renderer::RenderFrame();
-            renderer::EndFrame();
+            renderer->BeginFrame();
+            renderer->DrawFrame();
+            renderer->EndFrame();
 
             window.SwapBuffers();
             input::UpdateInputState();

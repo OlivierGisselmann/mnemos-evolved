@@ -27,8 +27,9 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
     )
 
     # Export additional .lib file for windows symbols
@@ -58,8 +59,9 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/glad.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
     )
 
     add_definitions(-DMEXPORT)
