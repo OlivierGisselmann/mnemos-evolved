@@ -15,7 +15,7 @@ namespace mnm::renderer
 
     void RenderFrame()
     {
-
+        
     }
 
     void EndFrame()

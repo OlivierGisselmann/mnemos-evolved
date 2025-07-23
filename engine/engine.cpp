@@ -36,7 +36,6 @@ namespace mnm
                 accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
             }     
             
-            // TODO - Render frame
             renderer::BeginFrame();
             renderer::RenderFrame();
             renderer::EndFrame();

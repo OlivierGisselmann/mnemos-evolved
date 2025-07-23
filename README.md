@@ -27,13 +27,13 @@ This project exists because I wanted to learn how a modern game engine works beh
     - [x] Game loop
         - [x] Fixed timestep update
         - [x] Variable timestep update
-    - [ ] Windowing
-        - [ ] Window abstraction
-        - [ ] Event handling
-        - [ ] OpenGL context
-    - [ ] Input
-        - [ ] Keycodes abstraction
-        - [ ] Key state
+    - [x] Windowing
+        - [x] Window abstraction
+        - [x] Event handling
+        - [x] OpenGL context
+    - [x] Input
+        - [x] Keycodes abstraction
+        - [x] Key state
     - [ ] Events
         - [ ] Event creation
         - [ ] Event callback
@@ -124,6 +124,7 @@ GNU General Public License. See `LICENSE` for details.
 
 Here is a list of useful resources I used for this project:
 
+- Effective C++ - Third Edition by Scott Meyers
 - Game Engine Architecture - Third Edition by Jason Gregory
 - Game Programming Patterns - Robert Nystrom
 - Kohi Game Engine series by Travis Vroman
