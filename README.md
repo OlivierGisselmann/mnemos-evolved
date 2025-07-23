@@ -38,11 +38,13 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Event creation
         - [ ] Event callback
     - [ ] Renderer
-        - [ ] Renderer API abstraction
+        - [x] Renderer API abstraction
         - [ ] Mesh rendering
         - [ ] Material system
         - [ ] Camera (projection, orthogonal)
-        - [ ] Rendering model (Phong, PBR)
+        - [ ] Lighting models
+            - [ ] Phong
+            - [ ] PBR
         - [ ] Deferred renderer
         - [ ] Post processing
     - [ ] ECS
