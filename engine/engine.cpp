@@ -5,7 +5,7 @@
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
 
-constexpr auto FIXED_UPDATE_RATE = 60.0f;
+constexpr auto FIXED_UPDATE_RATE = 10.0f;
 
 namespace mnm
 {
@@ -34,6 +34,7 @@ namespace mnm
             {
                 app->OnFixedUpdate();
                 accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
+                LOG("Fixed Update");
             }     
             
             renderer->BeginFrame();

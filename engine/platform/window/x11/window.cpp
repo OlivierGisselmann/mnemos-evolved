@@ -210,6 +210,16 @@ namespace mnm::window
             None
         };
 
+        // Get a pointer on glXSwapIntervalEXT function
+        PFNGLXSWAPINTERVALEXTPROC glXSwapIntervalEXT = 
+        (PFNGLXSWAPINTERVALEXTPROC)glXGetProcAddressARB(
+            (const GLubyte*)"glXSwapIntervalEXT");
+            if (!glXSwapIntervalEXT)
+        {
+            log::Log(log::Level::FATAL, log::Channel::WINDOW, "glXSwapIntervalEXT not supported");
+            return false;
+        }
+
         // Create GL Context
         mContext->context = glXCreateContextAttribsARB(mContext->display, mContext->fbConfig[0], 0, True, contextAttribs);
         if(!mContext->context)
@@ -226,6 +236,9 @@ namespace mnm::window
             log::Log(log::Level::FATAL, log::Channel::WINDOW, "Failed to load GL functions");
             return false;
         }
+
+        // Disable VSync
+        glXSwapIntervalEXT(mContext->display, mContext->window, 0);
 
         std::string renderer = (const char*)glGetString(GL_RENDERER);
         std::string version = (const char*)glGetString(GL_VERSION);
