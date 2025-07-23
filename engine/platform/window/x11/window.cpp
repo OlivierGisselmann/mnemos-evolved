@@ -167,7 +167,7 @@ namespace mnm::window
         mContext->attributes.background_pixel = 0xFFFFFFFF;
         mContext->attributes.border_pixel = 0;
         mContext->attributes.override_redirect = True;
-        mContext->attributes.event_mask = KeyPressMask | KeyReleaseMask | StructureNotifyMask | ExposureMask;
+        mContext->attributes.event_mask = KeyPressMask | KeyReleaseMask | StructureNotifyMask | ExposureMask | PointerMotionMask;
 
         // Create X11 window
         mContext->window = XCreateWindow(
@@ -291,6 +291,13 @@ namespace mnm::window
                 {
                     KeySym sym = XLookupKeysym(&mContext->event.xkey, 0);
                     input::SetKeyState(TranslateX11Key(sym), false);
+                    break;
+                }
+                case MotionNotify:
+                {
+                    const auto mousePosX = mContext->event.xmotion.x;
+                    const auto mousePosY = mContext->event.xmotion.y;
+                    input::SetMousePosition(mousePosX, mousePosY);
                     break;
                 }
                 default:

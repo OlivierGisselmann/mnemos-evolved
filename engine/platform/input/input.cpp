@@ -1,5 +1,7 @@
 #include <input.hpp>
 
+#include <core/logging/log.hpp>
+
 namespace mnm::input
 {
     // INTERNAL
