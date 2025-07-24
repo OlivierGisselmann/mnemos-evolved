@@ -8,6 +8,8 @@ namespace mnm::timer
 
     static u64 totalTime = 0, deltaTime = 0;
 
+    static u64 profilingStart = 0, profilingEnd = 0;
+
     void UpdateTimer()
     {
         static const auto start = std::chrono::steady_clock::now();
@@ -29,5 +31,18 @@ namespace mnm::timer
     [[nodiscard]] const u64 GetTotalTime()
     {
         return totalTime;
+    }
+
+    void StartProfiling()
+    {
+        profilingStart = GetTotalTime();
+    }
+
+    void StopProfiling()
+    {
+        profilingEnd = GetTotalTime();
+        std::stringstream message;
+        message << "Elapsed time: " << (profilingEnd - profilingStart) / 1e6 << " ms";
+        log::Log(log::Level::DEBUG, log::Channel::GLOBAL, message.str());
     }
 }

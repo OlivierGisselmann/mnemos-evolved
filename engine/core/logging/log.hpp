@@ -5,6 +5,7 @@
 #include <format>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 #define LOG(message)    Log(mnm::log::Level::DEBUG, mnm::log::Channel::GLOBAL, message)
 #define LOG_INFO(message)    Log(mnm::log::Level::INFO, mnm::log::Channel::GLOBAL, message)
