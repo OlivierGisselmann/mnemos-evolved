@@ -119,6 +119,10 @@ namespace mnm::math
         }
     };
 
+    typedef Vec3<f32> Vec3f;
+    typedef Vec3<i32> Vec3i;
+    typedef Vec3<u32> Vec3u;
+
     template <typename T>
     [[nodiscard]] inline T Length(const Vec3<T>& v)
     {
