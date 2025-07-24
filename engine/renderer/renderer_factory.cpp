@@ -8,19 +8,19 @@ namespace mnm::renderer
         {
         case RendererBackend::OpenGL:
         {
-            return std::make_unique<OpenGLRenderer>();
+            return std::make_unique<opengl::OpenGLRenderer>();
         }
         case RendererBackend::Vulkan:
         {
-            return std::make_unique<OpenGLRenderer>(); // Temporary
+            return std::make_unique<opengl::OpenGLRenderer>(); // Temporary
         }
         case RendererBackend::DirectX:
         {
-            return std::make_unique<OpenGLRenderer>(); // Temporary
+            return std::make_unique<opengl::OpenGLRenderer>(); // Temporary
         }
         default:
         {
-            return std::make_unique<OpenGLRenderer>(); // Temporary
+            return std::make_unique<opengl::OpenGLRenderer>(); // Temporary
         }
         }
     }
