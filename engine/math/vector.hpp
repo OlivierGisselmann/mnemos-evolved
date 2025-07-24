@@ -76,7 +76,7 @@ namespace mnm::math
             this->y = v.y;
             this->z = v.z;
         }
-        ~Vec2() {}
+        ~Vec3() {}
 
         // Arithmetic functions
         inline Vec3<T>& operator+=(const Vec3<T>& v)
@@ -91,7 +91,7 @@ namespace mnm::math
         {
             x -= v.x;
             y -= v.y;
-            Z -= v.z;
+            z -= v.z;
             return *this;
         }
 
@@ -99,7 +99,7 @@ namespace mnm::math
         {
             x *= value;
             y *= value;
-            Z *= value;
+            z *= value;
             return *this;
         }
 
