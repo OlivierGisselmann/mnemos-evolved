@@ -1,6 +1,6 @@
 #include <renderer/opengl/opengl_renderer.hpp>
 
-namespace mnm::renderer
+namespace mnm::renderer::opengl
 {
     void OpenGLRenderer::Initialize()
     {

@@ -5,7 +5,7 @@
 
 #include <glad/glad.h>
 
-namespace mnm::renderer
+namespace mnm::renderer::opengl
 {
     class OpenGLRenderer : public IRenderer
     {
