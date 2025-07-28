@@ -23,6 +23,7 @@ if(PLATFORM_WINDOWS)
     add_library(${PROJECT_NAME} SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/filesystem/filesystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
@@ -32,8 +33,8 @@ if(PLATFORM_WINDOWS)
         # OpenGL specific
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_buffer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
     )
 
     # Export additional .lib file for windows symbols
@@ -59,6 +60,7 @@ elseif(PLATFORM_LINUX)
     add_library(${PROJECT_NAME} SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/filesystem/filesystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
@@ -68,8 +70,8 @@ elseif(PLATFORM_LINUX)
         # OpenGL specific
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_buffer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
     )
 
     add_definitions(-DMEXPORT)

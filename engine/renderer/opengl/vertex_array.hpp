@@ -2,7 +2,10 @@
 #define VERTEX_ARRAY_HPP
 
 #include <types.hpp>
-#include <renderer/opengl/vertex_buffer.hpp>
+#include <renderer/structs/vertex.hpp>
+
+#include <glad/glad.h>
+#include <vector>
 
 namespace mnm::renderer::opengl
 {
@@ -15,9 +18,14 @@ namespace mnm::renderer::opengl
         void Bind() const;
         void Unbind() const;
 
+        u32 GetVerticesCount() const;
+        u32 GetIndicesCount() const;
+
     private:
-        u32 mID;
-        VertexBuffer mVertexBuffer;
+        u32 mVAO{}, mVBO{};
+
+        u32 mVerticesCount{};
+        u32 mIndicesCount{};
     };
 }
 
