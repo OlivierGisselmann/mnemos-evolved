@@ -55,4 +55,22 @@ namespace mnm::renderer::opengl
     {
         glUseProgram(mProgram);
     }
+
+    template<>
+    void Shader::SetUniform(const std::string& location, i32 value)
+    {
+        glUniform1i(glGetUniformLocation(mProgram, location.c_str()), value);
+    }
+
+    template<>
+    void Shader::SetUniform(const std::string& location, f32 value)
+    {
+        glUniform1f(glGetUniformLocation(mProgram, location.c_str()), value);
+    }
+
+    template<>
+    void Shader::SetUniform(const std::string& location, math::Vec3f value)
+    {
+        glUniform3f(glGetUniformLocation(mProgram, location.c_str()), value.x, value.y, value.z);
+    }
 }
