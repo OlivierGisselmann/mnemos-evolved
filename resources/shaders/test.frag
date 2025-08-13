@@ -8,9 +8,11 @@ uniform vec3 diffuse;
 uniform vec3 specular;
 uniform float specularStrength;
 
+uniform sampler2D textureMap;
+
 out vec4 fragColor;
 
 void main()
 {
-    fragColor = vec4(fColor, 1.0);
+    fragColor = texture(textureMap, fTexCoords);
 }

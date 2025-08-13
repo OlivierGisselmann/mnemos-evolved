@@ -15,8 +15,11 @@ namespace mnm::renderer::opengl
 
         parser::ImageData data = parser::ReadBMP(path);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, data.width, data.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data.pixels.data());
-        glGenerateMipmap(GL_TEXTURE_2D);
+        if(data.IsValid())
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, data.width, data.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data.pixels.data());
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
     }
 
     Texture::~Texture() {}
