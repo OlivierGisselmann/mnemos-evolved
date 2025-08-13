@@ -30,6 +30,7 @@ namespace mnm::log
         APPLICATION,
         WINDOW,
         RENDERER,
+        FILESYSTEM,
         INPUT
     };
 

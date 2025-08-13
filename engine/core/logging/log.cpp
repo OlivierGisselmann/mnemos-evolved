@@ -28,6 +28,7 @@ namespace mnm::log
         case APPLICATION:   return "[APPLICATION]";
         case WINDOW:        return "[WINDOW]";
         case RENDERER:      return "[RENDERER]";
+        case FILESYSTEM:    return "[FILESYSTEM]";
         case INPUT:         return "[INPUT]";
         default:            return "[UNKNOWN]";
         }
