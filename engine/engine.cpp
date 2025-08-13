@@ -5,7 +5,7 @@
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
 
-constexpr auto FIXED_UPDATE_RATE = 10.0f;
+constexpr auto FIXED_UPDATE_RATE = 60.0f;
 
 namespace mnm
 {
@@ -32,10 +32,10 @@ namespace mnm
 
             // Fixed timestep update
             accumulator += timer::GetDeltaTime();
-            while(accumulator > 1.0f / (FIXED_UPDATE_RATE / 1e9))
+            while(accumulator > 1.0 / (FIXED_UPDATE_RATE / 1e9))
             {
                 app->OnFixedUpdate();
-                accumulator -= 1.0f / (FIXED_UPDATE_RATE / 1e9);
+                accumulator -= 1.0 / (FIXED_UPDATE_RATE / 1e9);
             }     
             
             // Render frame

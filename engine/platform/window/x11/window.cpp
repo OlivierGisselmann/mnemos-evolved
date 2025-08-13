@@ -252,13 +252,12 @@ namespace mnm::window
 
     void MWindow::Shutdown()
     {
-        glXMakeCurrent(mContext->display, None, nullptr);
         glXDestroyContext(mContext->display, mContext->context);
         XDestroyWindow(mContext->display, mContext->window);
         XCloseDisplay(mContext->display);
         XFree(mContext->visualInfo);
         XFree(mContext->fbConfig);
-
+        
         log::Log(log::Level::INFO, log::Channel::WINDOW, "X11 Window shutdown");
     }
 
@@ -314,7 +313,6 @@ namespace mnm::window
                     break;
                 }
                 default:
-                    XFlush(mContext->display);
                     break;
                 }
         }
