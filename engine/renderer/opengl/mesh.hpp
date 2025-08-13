@@ -3,20 +3,22 @@
 
 #include <renderer/opengl/vertex_array.hpp>
 #include <renderer/opengl/shader.hpp>
+#include <renderer/structs/material.hpp>
 
 namespace mnm::renderer::opengl
 {
     class Mesh
     {
     public:
-        Mesh(const std::vector<Vertex>& vertices, const Shader& shader);
+        Mesh(const std::vector<Vertex>& vertices, Shader& shader);
         ~Mesh();
 
         void Draw();
 
     private:
         VertexArray mVAO;
-        const Shader& mShader;
+        Shader& mShader;
+        PhongMaterial mMaterial;
     };
 }
 

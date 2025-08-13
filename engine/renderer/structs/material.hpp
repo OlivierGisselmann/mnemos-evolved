@@ -13,10 +13,10 @@ namespace mnm::renderer
 
     struct PhongMaterial
     {
-        math::Vec3f ambient;
-        math::Vec3f diffuse;
-        math::Vec3f specular;
-        f32 specularStrength;
+        math::Vec3f ambient = {1.0f, 1.0f, 1.0f};
+        math::Vec3f diffuse = {1.0f, 1.0f, 1.0f};
+        math::Vec3f specular = {1.0f, 1.0f, 1.0f};
+        f32 specularStrength = 32.0f;
     };
 }
 
