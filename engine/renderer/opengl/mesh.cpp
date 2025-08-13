@@ -3,7 +3,7 @@
 namespace mnm::renderer::opengl
 {
     Mesh::Mesh(const std::vector<Vertex>& vertices, Shader& shader)
-    : mVAO(vertices), mShader(shader)
+    : mVAO(vertices), mShader(shader), mTexture("./texture.bmp")
     {
         mMaterial.ambient = math::Vec3f(0.2f, 0.2f, 0.2f);
         mMaterial.diffuse = math::Vec3f(0.f, 1.f, 0.f);
@@ -20,6 +20,9 @@ namespace mnm::renderer::opengl
     {
         mVAO.Bind();
         mShader.Use();
+
+        mTexture.Bind();
+        mShader.SetUniform("textureMap", (i32)mTexture.GetID());
 
         mShader.SetUniform("ambient", mMaterial.ambient);
         mShader.SetUniform("diffuse", mMaterial.diffuse);

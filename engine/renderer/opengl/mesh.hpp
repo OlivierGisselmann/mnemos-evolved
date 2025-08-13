@@ -3,6 +3,7 @@
 
 #include <renderer/opengl/vertex_array.hpp>
 #include <renderer/opengl/shader.hpp>
+#include <renderer/opengl/texture.hpp>
 #include <renderer/structs/material.hpp>
 
 namespace mnm::renderer::opengl
@@ -19,6 +20,7 @@ namespace mnm::renderer::opengl
         VertexArray mVAO;
         Shader& mShader;
         PhongMaterial mMaterial;
+        Texture mTexture;
     };
 }
 
