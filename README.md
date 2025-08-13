@@ -39,8 +39,8 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Event callback
     - [ ] Renderer
         - [x] Renderer API abstraction
-        - [ ] Mesh rendering
-        - [ ] Material system
+        - [x] Mesh rendering
+        - [x] Material system
         - [ ] Camera (projection, orthogonal)
         - [ ] Lighting models
             - [ ] Phong
@@ -53,7 +53,13 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Scene system
         - [ ] Entity hierarchy
     - [ ] Resource Manager
-        - [ ] File parsers (OBJ, FBX, GLTF, BMP, JPG, PNG)
+        - [ ] File parsers
+            - [x] BMP
+            - [ ] JPG
+            - [ ] PNG
+            - [ ] OBJ
+            - [ ] FBX
+            - [ ] GLTF
         - [ ] Asset caching
     - [ ] Editor
         - [ ] User Interface
@@ -105,9 +111,9 @@ MnemosEvolved/
 After building, the engine executable will be in the preset-specific `out/{preset}` directory:
 
 ```bash
-./out/debug-linux/application/Application
+./out/debug-linux/Application
 # OR
-.\out\debug-windows\application\Application.exe
+.\out\debug-windows\Application.exe
 ```
 
 ## Dependencies
