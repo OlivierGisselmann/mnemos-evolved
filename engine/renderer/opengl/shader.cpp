@@ -73,4 +73,10 @@ namespace mnm::renderer::opengl
     {
         glUniform3f(glGetUniformLocation(mProgram, location.c_str()), value.x, value.y, value.z);
     }
+
+    template<>
+    void Shader::SetUniform(const std::string& location, math::Mat4f matrix)
+    {
+        glUniformMatrix4fv(glGetUniformLocation(mProgram, location.c_str()), 1, GL_FALSE, matrix.Data());
+    }
 }
