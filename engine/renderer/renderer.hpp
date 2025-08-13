@@ -1,6 +1,8 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
+#include <types.hpp>
+
 namespace mnm::renderer
 {
     class IRenderer
@@ -8,7 +10,7 @@ namespace mnm::renderer
     public:
         virtual void Initialize() = 0;
         virtual void BeginFrame() = 0;
-        virtual void DrawFrame() = 0;
+        virtual void DrawFrame(f32 deltaTime) = 0;
         virtual void EndFrame() = 0;
 
         virtual ~IRenderer() = default;

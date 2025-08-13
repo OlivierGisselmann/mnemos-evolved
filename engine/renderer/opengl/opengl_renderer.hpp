@@ -12,7 +12,7 @@ namespace mnm::renderer::opengl
     public:
         void Initialize() override;
         void BeginFrame() override;
-        void DrawFrame() override;
+        void DrawFrame(f32 deltaTime) override;
         void EndFrame() override;
     };
 }
