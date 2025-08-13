@@ -35,6 +35,7 @@ if(PLATFORM_WINDOWS)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
     )
 
@@ -73,6 +74,7 @@ elseif(PLATFORM_LINUX)
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
     )
 

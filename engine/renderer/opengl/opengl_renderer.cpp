@@ -7,13 +7,47 @@ namespace mnm::renderer::opengl
 {
     const std::vector<mnm::renderer::Vertex> vertices = 
     {
-        {{-0.5f, -0.5f, 0.0f}, {0.f, 1.f, 0.f}, {0.f}},
-        {{0.5f, -0.5f, 0.0f}, {1.f, 1.f, 1.f}, {0.f}},
-        {{-0.5f,  0.5f, 0.0f}, {0.f, 0.f, 1.f}, {0.f}},
+        {{-0.5f, -0.5f, -0.5f}, {1.f, 0.f, 0.f}, {0.f, 0.f}},
+        {{ 0.5f, -0.5f, -0.5f}, {1.f, 0.f, 0.f}, {1.f, 0.f}},
+        {{ 0.5f,  0.5f, -0.5f}, {1.f, 0.f, 0.f}, {1.f, 1.f}},
+        {{ 0.5f,  0.5f, -0.5f}, {1.f, 0.f, 0.f}, {1.f, 1.f}},
+        {{-0.5f,  0.5f, -0.5f}, {1.f, 0.f, 0.f}, {0.f, 1.f}},
+        {{-0.5f, -0.5f, -0.5f}, {1.f, 0.f, 0.f}, {0.f, 0.f}},
 
-        {{0.5f, -0.5f, 0.0f}, {1.f, 1.f, 1.f}, {0.f}},
-        {{0.5f, 0.5f, 0.0f}, {1.f, 0.f, 0.f}, {0.f}},
-        {{-0.5f,  0.5f, 0.0f}, {0.f, 0.f, 1.f}, {0.f}}
+        {{-0.5f, -0.5f,  0.5f}, {0.f, 1.f, 0.f}, {0.f, 0.f}},
+        {{ 0.5f, -0.5f,  0.5f}, {0.f, 1.f, 0.f}, {1.f, 0.f}},
+        {{ 0.5f,  0.5f,  0.5f}, {0.f, 1.f, 0.f}, {1.f, 1.f}},
+        {{ 0.5f,  0.5f,  0.5f}, {0.f, 1.f, 0.f}, {1.f, 1.f}},
+        {{-0.5f,  0.5f,  0.5f}, {0.f, 1.f, 0.f}, {0.f, 1.f}},
+        {{-0.5f, -0.5f,  0.5f}, {0.f, 1.f, 0.f}, {0.f, 0.f}},
+
+        {{-0.5f,  0.5f,  0.5f}, {0.f, 0.f, 1.f}, {1.f, 0.f}},
+        {{-0.5f,  0.5f, -0.5f}, {0.f, 0.f, 1.f}, {1.f, 1.f}},
+        {{-0.5f, -0.5f, -0.5f}, {0.f, 0.f, 1.f}, {0.f, 1.f}},
+        {{-0.5f, -0.5f, -0.5f}, {0.f, 0.f, 1.f}, {0.f, 1.f}},
+        {{-0.5f, -0.5f,  0.5f}, {0.f, 0.f, 1.f}, {0.f, 0.f}},
+        {{-0.5f,  0.5f,  0.5f}, {0.f, 0.f, 1.f}, {1.f, 0.f}},
+
+        {{ 0.5f,  0.5f,  0.5f}, {1.f, 1.f, 0.f}, {1.f, 0.f}},
+        {{ 0.5f,  0.5f, -0.5f}, {1.f, 1.f, 0.f}, {1.f, 1.f}},
+        {{ 0.5f, -0.5f, -0.5f}, {1.f, 1.f, 0.f}, {0.f, 1.f}},
+        {{ 0.5f, -0.5f, -0.5f}, {1.f, 1.f, 0.f}, {0.f, 1.f}},
+        {{ 0.5f, -0.5f,  0.5f}, {1.f, 1.f, 0.f}, {0.f, 0.f}},
+        {{ 0.5f,  0.5f,  0.5f}, {1.f, 1.f, 0.f}, {1.f, 0.f}},
+
+        {{-0.5f, -0.5f, -0.5f}, {0.f, 1.f, 1.f}, {0.f, 1.f}},
+        {{ 0.5f, -0.5f, -0.5f}, {0.f, 1.f, 1.f}, {1.f, 1.f}},
+        {{ 0.5f, -0.5f,  0.5f}, {0.f, 1.f, 1.f}, {1.f, 0.f}},
+        {{ 0.5f, -0.5f,  0.5f}, {0.f, 1.f, 1.f}, {1.f, 0.f}},
+        {{-0.5f, -0.5f,  0.5f}, {0.f, 1.f, 1.f}, {0.f, 0.f}},
+        {{-0.5f, -0.5f, -0.5f}, {0.f, 1.f, 1.f}, {0.f, 1.f}},
+
+        {{-0.5f,  0.5f, -0.5f}, {1.f, 1.f, 1.f}, {0.f, 1.f}},
+        {{ 0.5f,  0.5f, -0.5f}, {1.f, 1.f, 1.f}, {1.f, 1.f}},
+        {{ 0.5f,  0.5f,  0.5f}, {1.f, 1.f, 1.f}, {1.f, 0.f}},
+        {{ 0.5f,  0.5f,  0.5f}, {1.f, 1.f, 1.f}, {1.f, 0.f}},
+        {{-0.5f,  0.5f,  0.5f}, {1.f, 1.f, 1.f}, {0.f, 0.f}},
+        {{-0.5f,  0.5f, -0.5f}, {1.f, 1.f, 1.f}, {0.f, 1.f}}
     };
 
     math::Mat4f model;
@@ -24,10 +58,9 @@ namespace mnm::renderer::opengl
     {
         glEnable(GL_DEPTH_TEST);
 
-        projection = math::Perspective(45.0f, (float)(1280.0f) / (float)(720.0f), 0.1f, 10.0f);
-        //view = math::LookAt(math::Vec3f{0.f, 0.f, 3.f}, math::Vec3f{0.f, 0.f, 0.f}, math::Vec3f{0.f, 1.f, 0.f});
-        view = math::Translate(view, {0.f, 0.f, -3.f});
-        model = math::Translate(model, {2.f, 0.f, -4.f});
+        projection = math::Perspective(45.0f, (float)(1280.0f) / (float)(720.0f), 0.1f, 100.0f);
+        view = math::LookAt(math::Vec3f{0.f, 0.f, -5.f}, math::Vec3f{0.f, 0.f, 1.f}, math::Vec3f{0.f, 1.f, 0.f});
+        model = math::Translate(model, {0.f});
     }
 
     void OpenGLRenderer::BeginFrame()
@@ -41,12 +74,12 @@ namespace mnm::renderer::opengl
         Shader shader("../../resources/shaders/test.vert", "../../resources/shaders/test.frag");
         Mesh mesh(vertices, shader);
 
-        shader.Use();
-
         static f32 rot = 0.f;
-        rot += deltaTime * 10.f;
-        model = math::RotateZ(model, rot);
+        rot += deltaTime * 15.f;
 
+        model = math::Rotate(model, rot, {0.5f});
+
+        shader.Use();
         shader.SetUniform("model", model);
         shader.SetUniform("view", view);
         shader.SetUniform("projection", projection);
