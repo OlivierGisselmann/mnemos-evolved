@@ -1,6 +1,8 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <types.hpp>
+
 #include <cmath>
 
 namespace mnm::math
@@ -42,17 +44,17 @@ namespace mnm::math
             return *this;
         }
 
-        [[nodiscard]] inline Vec2<T> operator+(const Vec2<T>& v)
+        [[nodiscard]] inline Vec2<T> operator+(const Vec2<T>& v) const
         {
             return {x + v.x, y + v.y};
         }
 
-        [[nodiscard]] inline Vec2<T> operator-(const Vec2<T>& v)
+        [[nodiscard]] inline Vec2<T> operator-(const Vec2<T>& v) const
         {
             return {x - v.x, y - v.y};
         }
 
-        [[nodiscard]] inline Vec2<T> operator*(T value)
+        [[nodiscard]] inline Vec2<T> operator*(T value) const
         {
             return {x * value, y * value};
         }
@@ -75,10 +77,11 @@ namespace mnm::math
             this->x = v.x;
             this->y = v.y;
             this->z = v.z;
+            return *this;
         }
         ~Vec3() {}
 
-        // Arithmetic functions
+        // Vector operations
         inline Vec3<T>& operator+=(const Vec3<T>& v)
         {
             x += v.x;
@@ -103,19 +106,36 @@ namespace mnm::math
             return *this;
         }
 
-        [[nodiscard]] inline Vec3<T> operator+(const Vec3<T>& v)
+        [[nodiscard]] inline Vec3<T> operator+(const Vec3<T>& v) const
         {
             return {x + v.x, y + v.y, z + v.z};
         }
 
-        [[nodiscard]] inline Vec3<T> operator-(const Vec3<T>& v)
+        [[nodiscard]] inline Vec3<T> operator-(const Vec3<T>& v) const
         {
             return {x - v.x, y - v.y, z - v.z};
         }
 
-        [[nodiscard]] inline Vec3<T> operator*(T value)
+        // Scalar operations
+
+        [[nodiscard]] inline Vec3<T> operator+(T value) const
+        {
+            return {x + value, y + value, z + value};
+        }
+
+        [[nodiscard]] inline Vec3<T> operator-(T value) const
+        {
+            return {x - value, y - value, z - value};
+        }
+
+        [[nodiscard]] inline Vec3<T> operator*(T value) const
         {
             return {x * value, y * value, z * value};
+        }
+
+        [[nodiscard]] inline Vec3<T> operator/(T value) const
+        {
+            return {x / value, y / value, z / value};
         }
     };
 
