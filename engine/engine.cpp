@@ -40,7 +40,7 @@ namespace mnm
             
             // Render frame
             renderer->BeginFrame();
-            renderer->DrawFrame();
+            renderer->DrawFrame(timer::GetDeltaTime() / 1e9);
             renderer->EndFrame();
 
             window.SwapBuffers();
