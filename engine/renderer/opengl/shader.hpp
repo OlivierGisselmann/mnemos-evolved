@@ -7,6 +7,7 @@
 
 #include <glad/glad.h>
 #include <string>
+#include <unordered_map>
 
 namespace mnm::renderer::opengl
 {
@@ -23,8 +24,10 @@ namespace mnm::renderer::opengl
 
     private:
         void CheckCompilation(u32 shaderID);
+        i32 GetUniformLocation(const std::string& location);
 
         u32 mProgram, mVertShader, mFragShader;
+        std::unordered_map<std::string, u32> mLocationCache;
     };
 }
 

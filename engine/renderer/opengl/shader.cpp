@@ -56,27 +56,40 @@ namespace mnm::renderer::opengl
         glUseProgram(mProgram);
     }
 
+    i32 Shader::GetUniformLocation(const std::string& location)
+    {
+        // Check if location is already in cache
+        if(mLocationCache.contains(location))
+            return mLocationCache[location];
+
+        // Otherwise get location and store it in cache
+        i32 value = glGetUniformLocation(mProgram, location.c_str());
+        mLocationCache.insert({location, value});
+
+        return value;
+    }
+
     template<>
     void Shader::SetUniform(const std::string& location, i32 value)
     {
-        glUniform1i(glGetUniformLocation(mProgram, location.c_str()), value);
+        glUniform1i(GetUniformLocation(location), value);
     }
 
     template<>
     void Shader::SetUniform(const std::string& location, f32 value)
     {
-        glUniform1f(glGetUniformLocation(mProgram, location.c_str()), value);
+        glUniform1f(GetUniformLocation(location), value);
     }
 
     template<>
     void Shader::SetUniform(const std::string& location, math::Vec3f value)
     {
-        glUniform3f(glGetUniformLocation(mProgram, location.c_str()), value.x, value.y, value.z);
+        glUniform3f(GetUniformLocation(location), value.x, value.y, value.z);
     }
 
     template<>
     void Shader::SetUniform(const std::string& location, math::Mat4f matrix)
     {
-        glUniformMatrix4fv(glGetUniformLocation(mProgram, location.c_str()), 1, GL_FALSE, matrix.Data());
+        glUniformMatrix4fv(GetUniformLocation(location), 1, GL_FALSE, matrix.Data());
     }
 }
