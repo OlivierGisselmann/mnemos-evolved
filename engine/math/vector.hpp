@@ -82,19 +82,19 @@ namespace mnm::math
         ~Vec3() {}
 
         // Vector operations
-        inline Vec3<T>& operator+=(const Vec3<T>& v)
+        inline Vec3<T>& operator+=(const Vec3<T>& rhs)
         {
-            x += v.x;
-            y += v.y;
-            z += v.z;
+            x += rhs.x;
+            y += rhs.y;
+            z += rhs.z;
             return *this;
         }
 
-        inline Vec3<T>& operator-=(const Vec3<T>& v)
+        inline Vec3<T>& operator-=(const Vec3<T>& rhs)
         {
-            x -= v.x;
-            y -= v.y;
-            z -= v.z;
+            x -= rhs.x;
+            y -= rhs.y;
+            z -= rhs.z;
             return *this;
         }
 
@@ -106,14 +106,14 @@ namespace mnm::math
             return *this;
         }
 
-        [[nodiscard]] inline Vec3<T> operator+(const Vec3<T>& v) const
+        [[nodiscard]] inline Vec3<T> operator+(const Vec3<T>& rhs) const
         {
-            return {x + v.x, y + v.y, z + v.z};
+            return {x + rhs.x, y + rhs.y, z + rhs.z};
         }
 
-        [[nodiscard]] inline Vec3<T> operator-(const Vec3<T>& v) const
+        [[nodiscard]] inline Vec3<T> operator-(const Vec3<T>& rhs) const
         {
-            return {x - v.x, y - v.y, z - v.z};
+            return {x - rhs.x, y - rhs.y, z - rhs.z};
         }
 
         // Scalar operations

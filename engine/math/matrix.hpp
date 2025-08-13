@@ -307,11 +307,11 @@ namespace mnm::math
     {
         Mat4<T> res;
 
-        Vec3<T> f = Normalize(eye - center);
+        Vec3<T> f = Normalize(center - eye);
         Vec3<T> s = Normalize(Cross(Normalize(up), f));
         Vec3<T> u = Normalize(Cross(f, s));
 
-        Vec3<T> t(0);
+        Vec3<T> t(0.f);
         t.x = Dot(s, eye);
         t.y = Dot(u, eye);
         t.z = Dot(f, eye);
