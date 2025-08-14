@@ -74,7 +74,8 @@ namespace mnm::parser
 
         // Get image dimensions
         image.width = infoHeader.width;
-        image.height = infoHeader.height;
+        image.height = std::abs(infoHeader.height);
+        image.channels = infoHeader.bitCount / 8;
         bool flipVertically = (infoHeader.height > 0);
 
         // Get pixel format and row padding
