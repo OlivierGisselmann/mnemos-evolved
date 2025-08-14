@@ -12,6 +12,7 @@ namespace mnm::math
     {
         T x, y;
 
+        Vec2() : x(0), y(0) {}
         Vec2(T _x, T _y) : x(_x), y(_y) {}
         Vec2(T value) : x(value), y(value) {}
         Vec2(const Vec2& v) : x(v.x), y(v.y) {}
@@ -19,6 +20,7 @@ namespace mnm::math
         {
             this->x = v.x;
             this->y = v.y;
+            return *this;
         }
         ~Vec2() {}
 
@@ -74,6 +76,7 @@ namespace mnm::math
     {
         T x, y, z;
 
+        Vec3() : x(0), y(0), z(0) {}
         Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
         Vec3(T value) : x(value), y(value), z(value) {}
         Vec3(const Vec3& v) : x(v.x), y(v.y), z(v.z) {}

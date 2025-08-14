@@ -107,14 +107,15 @@ namespace mnm::math
         {
             Mat4<T> res;
 
-            for(i8 row = 0; row < 4; ++row)
+            for(i8 col = 0; col < 4; ++col)
             {
-                for(i8 col = 0; col < 4; ++col)
+                for(i8 row = 0; row < 4; ++row)
                 {
-                    for(i8 k = 0; k < 4; ++k)
-                    {
-                        res(row, col) += (*this)(row, k) * rhs(k, col);
-                    }
+                    res(row, col) =
+                    (*this)(row, 0) * rhs(0, col) + 
+                    (*this)(row, 1) * rhs(1, col) + 
+                    (*this)(row, 2) * rhs(2, col) + 
+                    (*this)(row, 3) * rhs(3, col);
                 }
             }
 
@@ -151,14 +152,15 @@ namespace mnm::math
         {
             Mat4<T> res(0);
 
-            for(i8 row = 0; row < 4; ++row)
+            for(i8 col = 0; col < 4; ++col)
             {
-                for(i8 col = 0; col < 4; ++col)
+                for(i8 row = 0; row < 4; ++row)
                 {
-                    for(i8 k = 0; k < 4; ++k)
-                    {
-                        res(row, col) += (*this)(row, k) * rhs(k, col);
-                    }
+                    res(row, col) =
+                    (*this)(row, 0) * rhs(0, col) + 
+                    (*this)(row, 1) * rhs(1, col) + 
+                    (*this)(row, 2) * rhs(2, col) + 
+                    (*this)(row, 3) * rhs(3, col);
                 }
             }
 
@@ -180,25 +182,25 @@ namespace mnm::math
     template<typename T>
     [[nodiscard]] inline Mat4<T> Translate(const Mat4<T>& m, const Vec3<T>& t)
     {
-        Mat4<T> res(m);
+        Mat4<T> res;
 
         res(0, 3) = t.x;
         res(1, 3) = t.y;
         res(2, 3) = t.z;
 
-        return res;
+        return m * res;
     }
 
     template<typename T>
     [[nodiscard]] inline Mat4<T> Scale(const Mat4<T>& m, const Vec3<T>& s)
     {
-        Mat4<T> res(m);
+        Mat4<T> res;
 
         res(0, 0) = s.x;
         res(1, 1) = s.y;
         res(2, 2) = s.z;
 
-        return res;
+        return m * res;
     }
 
     template <typename T>
@@ -210,7 +212,7 @@ namespace mnm::math
 
 		Vec3<T> axis = Normalize(v);
 
-        Mat4<T> res(m);
+        Mat4<T> res;
 
 		res(0, 0) = c + (static_cast<T>(1) - c)      * axis.x     * axis.x;
 		res(0, 1) = (static_cast<T>(1) - c) * axis.x * axis.y + s * axis.z;
@@ -232,7 +234,7 @@ namespace mnm::math
 		res(3, 2) = 0;
 		res(3, 3) = 1;
 
-        return res;
+        return m * res;
     }
 
     template <typename T>
@@ -242,14 +244,14 @@ namespace mnm::math
         const T c = std::cos(a);
         const T s = std::sin(a);
 
-        Mat4<T> res(m);
+        Mat4<T> res;
 
         res(1, 1) = c;
         res(1, 2) = -s;
         res(2, 1) = s;
         res(2, 2) = c;
 
-        return res;
+        return m * res;
     }
 
     template <typename T>
@@ -259,14 +261,14 @@ namespace mnm::math
         const T c = std::cos(a);
         const T s = std::sin(a);
 
-        Mat4<T> res(m);
+        Mat4<T> res;
 
         res(0, 0) = c;
         res(0, 2) = s;
         res(2, 0) = -s;
         res(2, 2) = c;
 
-        return res;
+        return m * res;
     }
 
     template <typename T>
@@ -276,14 +278,14 @@ namespace mnm::math
         const T c = std::cos(a);
         const T s = std::sin(a);
 
-        Mat4<T> res(m);
+        Mat4<T> res;
 
         res(0, 0) = c;
         res(0, 1) = -s;
         res(1, 0) = s;
         res(1, 1) = c;
         
-        return res;
+        return m * res;
     }
 
     template<typename T>
