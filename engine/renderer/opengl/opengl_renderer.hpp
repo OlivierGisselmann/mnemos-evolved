@@ -11,7 +11,7 @@ namespace mnm::renderer::opengl
     {
     public:
         void Initialize() override;
-        void BeginFrame() override;
+        void BeginFrame(math::Vec2u windowSize) override;
         void DrawFrame(f32 deltaTime) override;
         void EndFrame() override;
     };

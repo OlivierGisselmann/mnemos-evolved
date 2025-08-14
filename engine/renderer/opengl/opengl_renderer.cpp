@@ -24,14 +24,23 @@ namespace mnm::renderer::opengl
 
         LOG(std::format("Mesh has {} vertices and {} indices", meshData.vertices.size(), meshData.indices.size()));
 
-        projection = math::Perspective(45.0f, (float)(1280.0f) / (float)(720.0f), 0.1f, 100.0f);
         view = math::LookAt(math::Vec3f{0.f, 0.f, -5.f}, math::Vec3f{0.f, 0.f, 1.f}, math::Vec3f{0.f, 1.f, 0.f});
         model = math::Translate(model, {0.f, -1.f, -5.f});
         model = math::Scale(model, {0.7f});
     }
 
-    void OpenGLRenderer::BeginFrame()
+    void OpenGLRenderer::BeginFrame(math::Vec2u windowSize)
     {
+        // Check for window resize
+        static math::Vec2u currentSize{};
+        if(currentSize != windowSize)
+        {
+            currentSize = windowSize;
+            glViewport(0, 0, currentSize.x, currentSize.y);
+            projection = math::Perspective(45.0f, (f32)(currentSize.x) / (f32)(currentSize.y), 0.1f, 100.0f);
+        }
+
+        // Clear buffers
         glClearColor((195.f / 256.f), (223.f / 256.f), (224.f / 256.f), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }

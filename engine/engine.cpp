@@ -14,7 +14,7 @@ namespace mnm
     {
         // Subsystems initialization
         window::MWindow window;
-        window.Initialize(1280, 720, "Mnemos Evolved");
+        window.Initialize({1280, 720}, "Mnemos Evolved");
 
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
         renderer->Initialize();
@@ -39,7 +39,7 @@ namespace mnm
             }     
             
             // Render frame
-            renderer->BeginFrame();
+            renderer->BeginFrame(window.GetSize());
             renderer->DrawFrame(timer::GetDeltaTime() / 1e9);
             renderer->EndFrame();
 

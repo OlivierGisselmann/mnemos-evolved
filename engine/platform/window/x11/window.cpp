@@ -114,10 +114,9 @@ namespace mnm::window
 
     MWindow::~MWindow() {}
 
-    bool MWindow::Initialize(u16 width, u16 height, const std::string& title)
+    bool MWindow::Initialize(math::Vec2u size, const std::string& title)
     {
-        mWidth = width;
-        mHeight = height;
+        mSize = size;
         mTitle = title;
 
         // Connect to X11's server
@@ -172,7 +171,7 @@ namespace mnm::window
         // Create X11 window
         mContext->window = XCreateWindow(
             mContext->display, RootWindow(mContext->display, mContext->screen), 0, 0,
-            mWidth, mHeight, 0, mContext->visualInfo->depth, InputOutput, mContext->visualInfo->visual,
+            mSize.x, mSize.y, 0, mContext->visualInfo->depth, InputOutput, mContext->visualInfo->visual,
             CWBackPixel | CWBorderPixel | CWEventMask | CWColormap, &mContext->attributes
         );
 
@@ -250,6 +249,11 @@ namespace mnm::window
         return true;
     }
 
+    math::Vec2u MWindow::GetSize() const
+    {
+        return mSize;
+    }
+
     void MWindow::Shutdown()
     {
         glXDestroyContext(mContext->display, mContext->context);
@@ -286,10 +290,10 @@ namespace mnm::window
                 case ConfigureNotify:
                 {
                     XConfigureEvent xce = mContext->event.xconfigure;
-                    if(xce.width != mWidth || xce.height != mHeight)
+                    if(xce.width != mSize.x || xce.height != mSize.y)
                     {
-                        mWidth = xce.width;
-                        mHeight = xce.height;
+                        mSize.x = xce.width;
+                        mSize.y = xce.height;
                     }
                     break;
                 }

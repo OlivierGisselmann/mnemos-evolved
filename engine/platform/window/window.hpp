@@ -2,6 +2,7 @@
 #define WINDOW_HPP
 
 #include <core/logging/log.hpp>
+#include <math/vector.hpp>
 #include <platform/input/input_system.hpp>
 
 #include <input.hpp>
@@ -24,17 +25,19 @@ namespace mnm::window
         MWindow& operator=(const MWindow&) = delete;
         ~MWindow();
 
-        bool Initialize(u16 width, u16 height, const std::string& title);
+        bool Initialize(math::Vec2u size, const std::string& title);
 
         void PollEvents();
         void SwapBuffers();
         bool CloseRequested() const;
+        
+        math::Vec2u GetSize() const;
 
         void Shutdown();
 
     private:
         std::unique_ptr<MWindowContext> mContext;
-        u16 mWidth = 0, mHeight = 0;
+        math::Vec2u mSize{};
         std::string mTitle = {};
         bool mCloseRequested = false;
     };

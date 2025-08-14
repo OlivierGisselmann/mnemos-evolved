@@ -21,10 +21,9 @@ namespace mnm::window
 
     MWindow::~MWindow() {}
 
-    bool MWindow::Initialize(u16 width, u16 height, const std::string& title)
+    bool MWindow::Initialize(math::Vec2u size, const std::string& title)
     {
-        mWidth = width;
-        mHeight = height;
+        mSize = size;
         mTitle = title;
 
         mContext->hInstance = GetModuleHandle(0);
@@ -49,7 +48,7 @@ namespace mnm::window
         // Create window then check result
         mContext->window = CreateWindowExA(
             0, mContext->wndClass.lpszClassName, mTitle.c_str(), WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-            CW_USEDEFAULT, CW_USEDEFAULT, mWidth, mHeight, nullptr, nullptr,
+            CW_USEDEFAULT, CW_USEDEFAULT, mSize.x, mSize.y, nullptr, nullptr,
             mContext->hInstance, this
         );
 
