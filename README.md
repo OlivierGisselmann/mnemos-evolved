@@ -45,7 +45,7 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Lighting models
             - [ ] Phong
             - [ ] PBR
-        - [ ] Deferred renderer
+        - [ ] Deferred renderer
         - [ ] Post processing
     - [ ] ECS
         - [ ] Entity
