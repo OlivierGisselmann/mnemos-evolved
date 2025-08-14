@@ -5,6 +5,7 @@
 #include <core/parsers/data_formats.hpp>
 #include <renderer/structs/vertex.hpp>
 
+#include <algorithm>
 #include <fstream>
 #include <unordered_map>
 
