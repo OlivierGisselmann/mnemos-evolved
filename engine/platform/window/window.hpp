@@ -28,10 +28,12 @@ namespace mnm::window
         bool Initialize(math::Vec2u size, const std::string& title);
 
         void PollEvents();
-        void SwapBuffers();
+        void SwapWindowBuffers();
         bool CloseRequested() const;
         
         math::Vec2u GetSize() const;
+        void SetSize(const math::Vec2u& size);
+        void SetCloseRequested(bool state);
 
         void Shutdown();
 

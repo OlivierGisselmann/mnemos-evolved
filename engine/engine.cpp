@@ -43,7 +43,7 @@ namespace mnm
             renderer->DrawFrame(timer::GetDeltaTime() / 1e9);
             renderer->EndFrame();
 
-            window.SwapBuffers();
+            window.SwapWindowBuffers();
             input::UpdateInputState();
         }
 

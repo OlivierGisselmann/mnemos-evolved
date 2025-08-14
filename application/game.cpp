@@ -1,5 +1,7 @@
 #include "game.hpp"
 
+#include <iostream>
+
 namespace game
 {
     void Game::OnInit()

@@ -254,6 +254,12 @@ namespace mnm::window
         return mSize;
     }
 
+    void MWindow::SetSize(const math::Vec2u& size)
+    {
+        mSize = size;
+    }
+
+
     void MWindow::Shutdown()
     {
         glXDestroyContext(mContext->display, mContext->context);
@@ -268,6 +274,11 @@ namespace mnm::window
     bool MWindow::CloseRequested() const
     {
         return mCloseRequested;
+    }
+
+    void MWindow::SetCloseRequested(bool state)
+    {
+        mCloseRequested = state;
     }
 
     void MWindow::PollEvents()
@@ -322,7 +333,7 @@ namespace mnm::window
         }
     }
 
-    void MWindow::SwapBuffers()
+    void MWindow::SwapWindowBuffers()
     {
         glXSwapBuffers(mContext->display, mContext->window);
     }
