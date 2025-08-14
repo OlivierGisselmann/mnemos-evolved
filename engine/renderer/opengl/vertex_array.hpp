@@ -12,7 +12,7 @@ namespace mnm::renderer::opengl
     class VertexArray
     {
     public:
-        VertexArray(const std::vector<Vertex>& vertices);
+        VertexArray(const std::vector<Vertex>& vertices, const std::vector<u32>& indices);
         ~VertexArray();
 
         void Bind() const;
@@ -22,7 +22,7 @@ namespace mnm::renderer::opengl
         u32 GetIndicesCount() const;
 
     private:
-        u32 mVAO{}, mVBO{};
+        u32 mVAO{}, mVBO{}, mEBO{};
 
         u32 mVerticesCount{};
         u32 mIndicesCount{};

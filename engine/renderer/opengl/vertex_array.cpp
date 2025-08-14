@@ -2,16 +2,23 @@
 
 namespace mnm::renderer::opengl
 {
-    VertexArray::VertexArray(const std::vector<Vertex>& vertices)
-    : mVerticesCount(vertices.size())
+    VertexArray::VertexArray(const std::vector<Vertex>& vertices, const std::vector<u32>& indices)
+    : mVerticesCount(vertices.size()), mIndicesCount(indices.size())
     {
         glGenVertexArrays(1, &mVAO);
         Bind();
 
+        // Vertex Buffer Object
         glGenBuffers(1, &mVBO);
         glBindBuffer(GL_ARRAY_BUFFER, mVBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
+        // Element Buffer Object
+        glGenBuffers(1, &mEBO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(u32), indices.data(), GL_STATIC_DRAW);
+
+        // Vertex attributes
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
         glEnableVertexAttribArray(0);
 
@@ -27,6 +34,7 @@ namespace mnm::renderer::opengl
     VertexArray::~VertexArray()
     {
         glDeleteBuffers(1, &mVBO);
+        glDeleteBuffers(1, &mEBO);
         glDeleteVertexArrays(1, &mVAO);
     }
 
