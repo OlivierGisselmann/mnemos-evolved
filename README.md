@@ -19,7 +19,7 @@ This project exists because I wanted to learn how a modern game engine works beh
 
 ### List of features (WIP)
 - [x] CMake cross-platform project structure
-- [ ] Engine subsystems
+- [x] Engine subsystems
     - [x] Logging
         - [x] Levels
         - [x] Channels
@@ -37,7 +37,7 @@ This project exists because I wanted to learn how a modern game engine works beh
     - [ ] Events
         - [ ] Event creation
         - [ ] Event callback
-    - [ ] Renderer
+    - [x] Renderer
         - [x] Renderer API abstraction
         - [x] Mesh rendering
         - [x] Material system
@@ -52,12 +52,12 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [ ] Components
         - [ ] Scene system
         - [ ] Entity hierarchy
-    - [ ] Resource Manager
-        - [ ] File parsers
+    - [x] Resource Manager
+        - [x] File parsers
             - [x] BMP
             - [ ] JPG
             - [ ] PNG
-            - [ ] OBJ
+            - [x] OBJ
             - [ ] FBX
             - [ ] GLTF
         - [ ] Asset caching
