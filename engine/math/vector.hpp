@@ -58,6 +58,11 @@ namespace mnm::math
         {
             return {x * value, y * value};
         }
+
+        [[nodiscard]] inline bool operator==(const Vec2<T>& rhs) const
+        {
+            return x == rhs.x && y == rhs.y;
+        }
     };
 
     typedef Vec2<f32> Vec2f;
@@ -136,6 +141,11 @@ namespace mnm::math
         [[nodiscard]] inline Vec3<T> operator/(T value) const
         {
             return {x / value, y / value, z / value};
+        }
+
+        [[nodiscard]] inline bool operator==(const Vec3<T>& rhs) const
+        {
+            return x == rhs.x && y == rhs.y && z == rhs.z;
         }
     };
 

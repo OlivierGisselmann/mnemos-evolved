@@ -10,6 +10,13 @@ namespace mnm::renderer
         math::Vec3f position;
         math::Vec3f normal;
         math::Vec2f texCoords;
+
+        bool operator==(const Vertex& rhs) const
+        {
+            return position == rhs.position &&
+                    normal == rhs.normal &&
+                    texCoords == rhs.texCoords;
+        }
     };
 }
 
