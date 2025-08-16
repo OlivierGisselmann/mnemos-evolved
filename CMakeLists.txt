@@ -16,84 +16,65 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
+# Fetch required packages
+find_package(OpenGL REQUIRED)
+
+# Create shared library
+add_library(${PROJECT_NAME} SHARED
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/filesystem/filesystem.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
+
+    # OpenGL specific
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
+)
+
+# Enable symbol export for .DLL
+add_definitions(-DMEXPORT)
+
+# Set project version
+set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+
+# Set public API header
+set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hpp)
+
+# Include sources and public API to avoid relative paths
+target_include_directories(${PROJECT_NAME} PRIVATE engine include vendor)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
+
 if(PLATFORM_WINDOWS)
-    # Fetch required packages
-    find_package(OpenGL REQUIRED)
-
-    # Create shared library
-    add_library(${PROJECT_NAME} SHARED
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/filesystem/filesystem.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
-
-        # OpenGL specific
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
-    )
 
     # Export additional .lib file for windows symbols
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    add_definitions(-DMEXPORT)
 
-    # Set project version
-    set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-    set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+    # Platform-specific implementation
+    target_sources(${PROJECT_NAME} PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/win32/window.cpp
+    )
 
     # Avoid Debug/Release subfolders
     set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/engine$<0:>)
-
-    # Set public API header
-    set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hpp)
-
-    # Include sources and public API to avoid relative paths
-    target_include_directories(${PROJECT_NAME} PRIVATE engine include vendor)
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 elseif(PLATFORM_LINUX)
     # Fetch required packages
     find_package(X11 REQUIRED)
-    find_package(OpenGL REQUIRED)
 
-    # Create shared library
-    add_library(${PROJECT_NAME} SHARED
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/engine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/logging/log.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/filesystem/filesystem.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/core/timer/timer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
+    # Platform-specific implementation
+    target_sources(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/window/x11/window.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
-
-        # OpenGL specific
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/glad.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/opengl_renderer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/vertex_array.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
     )
 
-    add_definitions(-DMEXPORT)
-
-    # Set project version
-    set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-    set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-
-    # Set public API header
-    set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/mnemos.hpp)
-
     # Include sources and public API to avoid relative paths
-    target_include_directories(${PROJECT_NAME} PRIVATE engine include vendor)
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES} ${OPENGL_LIBRARIES})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${X11_LIBRARIES})
 endif()
 
 # Add application subfolder
