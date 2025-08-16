@@ -9,6 +9,9 @@ constexpr auto FIXED_UPDATE_RATE = 60.0f;
 
 namespace mnm
 {
+    // TODO: Refactor this
+    static bool sUserSideStop = false;
+
     /* MAIN ENGINE LOOP */
     void Run(const std::unique_ptr<MnemosApplication>& app) noexcept
     {
@@ -22,7 +25,7 @@ namespace mnm
         app->OnInit();
 
         u64 accumulator = 0;
-        while(!window.CloseRequested())
+        while(!window.CloseRequested() && !sUserSideStop)
         {
             window.PollEvents();
 
@@ -51,5 +54,11 @@ namespace mnm
         app->OnShutdown();
 
         window.Shutdown();
+    }
+
+    // Temporary user-side main loop break
+    void Stop() noexcept
+    {
+        sUserSideStop = true;
     }
 }

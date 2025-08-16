@@ -11,7 +11,10 @@ namespace game
 
     void Game::OnUpdate()
     {
-        // mnm::debug::Log("Game OnUpdate()");
+        if(mnm::input::IsKeyPressed(mnm::input::Key::Escape))
+        {
+            mnm::Stop();
+        }
     }
 
     void Game::OnFixedUpdate()
