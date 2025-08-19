@@ -47,10 +47,10 @@ This project exists because I wanted to learn how a modern game engine works beh
             - [ ] PBR
         - [ ] Deferred renderer
         - [ ] Post processing
-    - [ ] ECS
-        - [ ] Entity
-        - [ ] Components
-        - [ ] Scene system
+    - [x] ECS
+        - [x] Entity
+        - [x] Components
+        - [x] Scene system
         - [ ] Entity hierarchy
     - [x] Resource Manager
         - [x] File parsers
