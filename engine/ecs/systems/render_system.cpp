@@ -4,16 +4,16 @@ extern mnm::ecs::Coordinator gCoordinator;
 
 namespace mnm::ecs
 {
-    void RenderSystem::Init()
+    void RenderSystem::Init(std::shared_ptr<renderer::opengl::Shader> shader)
     {
-        mShader = std::make_unique<renderer::opengl::Shader>("../../resources/shaders/test.vert", "../../resources/shaders/test.frag");
+        mShader = shader;
 
-        // Load OBJ files for each models
+        // Create mesh for each entity
         for(auto& entity : mEntities)
         {
             auto& renderable = gCoordinator.GetComponent<Renderable>(entity);
             auto meshData = parser::ReadOBJ(renderable.modelPath);
-            renderable.mesh = std::make_shared<renderer::opengl::Mesh>(meshData.vertices, meshData.indices);
+            renderable.mesh = std::make_shared<renderer::opengl::Mesh>(meshData->vertices, meshData->indices);
         }
     }
 

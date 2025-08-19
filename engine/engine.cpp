@@ -9,16 +9,7 @@
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
 
-#include <cstdlib>
-
 constexpr auto FIXED_UPDATE_RATE = 60.0f;
-
-unsigned bounded_rand(unsigned range)
-{
-    for (unsigned x, r;;)
-        if (x = rand(), r = x % range, x - r <= -range)
-            return r;
-}
 
 mnm::ecs::Coordinator gCoordinator;
 
@@ -36,6 +27,8 @@ namespace mnm
 
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
         renderer->Initialize();
+
+        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/test.vert", "../../resources/shaders/test.frag");
 
         // ECS initialization
         gCoordinator.Init();
@@ -59,14 +52,14 @@ namespace mnm
 
             gCoordinator.AddComponent(entity, ecs::Transform
             {
-                .position = {bounded_rand(10), bounded_rand(10), bounded_rand(20)},
-                .rotation = {bounded_rand(180), bounded_rand(180),bounded_rand(180)},
-                .scale = {bounded_rand(10)}
+                .position = {(float)(std::rand() % 10)},
+                .rotation = {(float)(std::rand() % 180)},
+                .scale = {(float)(std::rand() % 10)}
             });
             gCoordinator.AddComponent(entity, ecs::Renderable{"../../resources/models/bunny.obj"});
         }
 
-        renderSystem->Init();
+        renderSystem->Init(shader);
 
         app->OnInit();
 
@@ -80,9 +73,9 @@ namespace mnm
 
             for(auto& entity : entities)
             {
-                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.x += bounded_rand(3);
-                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.y += bounded_rand(3);
-                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.z += bounded_rand(3);
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.x += (float)(std::rand() % 3);
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.y += (float)(std::rand() % 3);
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.z += (float)(std::rand() % 3);
             }
 
             // Fixed timestep update

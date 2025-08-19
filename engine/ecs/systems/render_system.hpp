@@ -12,12 +12,12 @@ namespace mnm::ecs
     class RenderSystem : public System
     {
     public:
-        void Init();
+        void Init(std::shared_ptr<renderer::opengl::Shader> shader);
 
         void Update(f32 deltaTime);
 
     private:
-        std::unique_ptr<renderer::opengl::Shader> mShader;
+        std::shared_ptr<renderer::opengl::Shader> mShader;
     };
 }
 

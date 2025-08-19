@@ -21,20 +21,20 @@ namespace mnm::parser
         }
     };
 
-    inline MeshData ReadOBJ(const std::string& path)
+    inline MeshData* ReadOBJ(const std::string& path)
     {
         static std::unordered_map<std::string, MeshData> cache;
 
         // Return cached data if exists
         if(cache.find(path) != cache.end())
-            return cache[path];
+            return &cache[path];
 
         // Open file
         std::ifstream file(path);
         if(!file)
         {
             log::Log(log::Level::ERR, log::Channel::FILESYSTEM, std::format("Could not open file: {}", path));
-            return {};
+            return nullptr;
         }
 
         MeshData mesh;
@@ -106,7 +106,7 @@ namespace mnm::parser
 
         log::Log(log::Level::DEBUG, log::Channel::FILESYSTEM, std::format("{} loaded!", path));
 
-        return mesh;
+        return &cache[path];
     }
 }
 

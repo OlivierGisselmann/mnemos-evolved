@@ -60,7 +60,7 @@ This project exists because I wanted to learn how a modern game engine works beh
             - [x] OBJ
             - [ ] FBX
             - [ ] GLTF
-        - [ ] Asset caching
+        - [x] Asset caching
     - [ ] Editor
         - [ ] User Interface
         - [ ] Scene tree panel
