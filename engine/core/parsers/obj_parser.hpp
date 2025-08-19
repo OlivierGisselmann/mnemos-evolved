@@ -21,7 +21,7 @@ namespace mnm::parser
         }
     };
 
-    MeshData ReadOBJ(const std::string& path)
+    inline MeshData ReadOBJ(const std::string& path)
     {
         // Open file
         std::ifstream file(path);
