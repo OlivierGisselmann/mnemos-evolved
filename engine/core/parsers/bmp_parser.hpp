@@ -6,6 +6,7 @@
 
 #include <fstream>
 #include <string>
+#include <unordered_map>
 
 namespace mnm::parser
 {
@@ -37,6 +38,12 @@ namespace mnm::parser
 
     inline ImageData ReadBMP(const std::string& path) noexcept
     {
+        static std::unordered_map<std::string, ImageData> cache;
+
+        // Check cache before reading file
+        if(cache.find(path) != cache.end())
+            return cache[path];
+
         ImageData image;
 
         // Open file
@@ -111,6 +118,9 @@ namespace mnm::parser
         }
 
         file.close();
+
+        // Store data in cache
+        cache.insert({path, image});
 
         return image;
     }

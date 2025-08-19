@@ -23,6 +23,12 @@ namespace mnm::parser
 
     inline MeshData ReadOBJ(const std::string& path)
     {
+        static std::unordered_map<std::string, MeshData> cache;
+
+        // Return cached data if exists
+        if(cache.find(path) != cache.end())
+            return cache[path];
+
         // Open file
         std::ifstream file(path);
         if(!file)
@@ -94,6 +100,9 @@ namespace mnm::parser
                 }
             }
         }
+
+        // Add Mesh Data to cache
+        cache.insert({path, mesh});
 
         return mesh;
     }
