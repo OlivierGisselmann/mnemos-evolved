@@ -136,3 +136,4 @@ Here is a list of useful resources I used for this project:
 - Game Engine Architecture - Third Edition by Jason Gregory
 - Game Programming Patterns - Robert Nystrom
 - Kohi Game Engine series by Travis Vroman
+- Austin Morlan's blog
