@@ -2,18 +2,20 @@
 
 #include <iostream>
 
+using namespace mnm;
+
 namespace game
 {
     void Game::OnInit()
     {
-        mnm::debug::Log("Game Init()");
+        debug::Log("Game Init()");
     }
 
-    void Game::OnUpdate()
+    void Game::OnUpdate(float delta)
     {
-        if(mnm::input::IsKeyPressed(mnm::input::Key::Escape))
+        if(input::IsKeyPressed(input::Key::Escape))
         {
-            mnm::Stop();
+            Stop();
         }
     }
 
@@ -24,6 +26,6 @@ namespace game
 
     void Game::OnShutdown()
     {
-        mnm::debug::Log("Game Shutdown()");
+        debug::Log("Game Shutdown()");
     }
 }

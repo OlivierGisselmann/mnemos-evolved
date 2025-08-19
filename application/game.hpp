@@ -11,7 +11,7 @@ namespace game
     {
     public:
         void OnInit() override;
-        void OnUpdate() override;
+        void OnUpdate(float delta) override;
         void OnFixedUpdate() override;
         void OnShutdown() override;
     };
