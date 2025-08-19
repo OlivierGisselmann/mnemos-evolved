@@ -11,7 +11,7 @@ namespace mnm::ecs
     struct Renderable
     {
         std::string modelPath{};
-        renderer::opengl::Mesh* mesh{nullptr};
+        std::shared_ptr<renderer::opengl::Mesh> mesh{nullptr};
     };
 }
 

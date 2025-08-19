@@ -13,7 +13,7 @@ namespace mnm::ecs
         {
             auto& renderable = gCoordinator.GetComponent<Renderable>(entity);
             auto meshData = parser::ReadOBJ(renderable.modelPath);
-            renderable.mesh = new renderer::opengl::Mesh(meshData.vertices, meshData.indices);
+            renderable.mesh = std::make_shared<renderer::opengl::Mesh>(meshData.vertices, meshData.indices);
         }
     }
 
