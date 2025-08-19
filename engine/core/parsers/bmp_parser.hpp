@@ -122,6 +122,8 @@ namespace mnm::parser
         // Store data in cache
         cache.insert({path, image});
 
+        log::Log(log::Level::DEBUG, log::Channel::FILESYSTEM, std::format("{} loaded!", path));
+
         return image;
     }
 }

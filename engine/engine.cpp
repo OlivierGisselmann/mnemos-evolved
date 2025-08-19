@@ -9,7 +9,16 @@
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
 
+#include <cstdlib>
+
 constexpr auto FIXED_UPDATE_RATE = 60.0f;
+
+unsigned bounded_rand(unsigned range)
+{
+    for (unsigned x, r;;)
+        if (x = rand(), r = x % range, x - r <= -range)
+            return r;
+}
 
 mnm::ecs::Coordinator gCoordinator;
 
@@ -40,21 +49,24 @@ namespace mnm
             signature.set(gCoordinator.GetComponentType<ecs::Transform>());
             gCoordinator.SetSystemSignature<ecs::RenderSystem>(signature);
         }
+
+        // Entity initialization
+        std::vector<ecs::Entity> entities(100);
+
+        for(auto& entity : entities)
+        {
+            entity = gCoordinator.CreateEntity();
+
+            gCoordinator.AddComponent(entity, ecs::Transform
+            {
+                .position = {bounded_rand(10), bounded_rand(10), bounded_rand(20)},
+                .rotation = {bounded_rand(180), bounded_rand(180),bounded_rand(180)},
+                .scale = {bounded_rand(10)}
+            });
+            gCoordinator.AddComponent(entity, ecs::Renderable{"../../resources/models/bunny.obj"});
+        }
+
         renderSystem->Init();
-
-        ecs::Entity model1 = gCoordinator.CreateEntity();
-        gCoordinator.AddComponent(model1, ecs::Renderable{});
-        gCoordinator.AddComponent(model1, ecs::Transform{});
-
-        gCoordinator.GetComponent<ecs::Transform>(model1).position = {2.f, -0.5f, 0.f};
-        gCoordinator.GetComponent<ecs::Transform>(model1).scale = {0.5f};
-
-        ecs::Entity model2 = gCoordinator.CreateEntity();
-        gCoordinator.AddComponent(model2, ecs::Renderable{});
-        gCoordinator.AddComponent(model2, ecs::Transform{});
-
-        gCoordinator.GetComponent<ecs::Transform>(model2).position = {-2.f, -0.5f, 0.f};
-        gCoordinator.GetComponent<ecs::Transform>(model2).scale = {0.5f};
 
         app->OnInit();
 
@@ -63,12 +75,15 @@ namespace mnm
         {
             window.PollEvents();
 
-            // TODO - Update engine state
             timer::UpdateTimer();
             app->OnUpdate((float)(timer::GetDeltaTime() / 1e9));
 
-            gCoordinator.GetComponent<ecs::Transform>(model1).rotation.x += (timer::GetDeltaTime() / 1e7);
-            gCoordinator.GetComponent<ecs::Transform>(model2).rotation.y += (timer::GetDeltaTime() / 1e7);
+            for(auto& entity : entities)
+            {
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.x += bounded_rand(3);
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.y += bounded_rand(3);
+                gCoordinator.GetComponent<ecs::Transform>(entity).rotation.z += bounded_rand(3);
+            }
 
             // Fixed timestep update
             accumulator += timer::GetDeltaTime();
@@ -82,7 +97,7 @@ namespace mnm
             renderer->BeginFrame(window.GetSize());
             renderer->DrawFrame(timer::GetDeltaTime() / 1e9);
             renderer->EndFrame();
-            
+
             renderSystem->Update(timer::GetDeltaTime() / 1e9);
 
             window.SwapWindowBuffers();

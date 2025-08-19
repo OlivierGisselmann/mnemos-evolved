@@ -104,6 +104,8 @@ namespace mnm::parser
         // Add Mesh Data to cache
         cache.insert({path, mesh});
 
+        log::Log(log::Level::DEBUG, log::Channel::FILESYSTEM, std::format("{} loaded!", path));
+
         return mesh;
     }
 }
