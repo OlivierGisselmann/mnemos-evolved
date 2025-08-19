@@ -6,7 +6,6 @@
 #include <ecs/components/renderable.hpp>
 #include <ecs/components/transform.hpp>
 #include <renderer/opengl/shader.hpp>
-#include <renderer/opengl/mesh.hpp>
 
 namespace mnm::ecs
 {
@@ -19,7 +18,6 @@ namespace mnm::ecs
 
     private:
         std::unique_ptr<renderer::opengl::Shader> mShader;
-        std::unique_ptr<renderer::opengl::Mesh> mMesh;
     };
 }
 
