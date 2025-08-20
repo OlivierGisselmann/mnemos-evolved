@@ -77,9 +77,9 @@ namespace mnm
         // Light entity
         auto light = gCoordinator.CreateEntity();
         gCoordinator.AddComponent(light, ecs::DirectionalLight{
-            .position = {0.f, 3.f, 0.f},
-            .color = {1.f, 0.f, 0.f},
-            .intensity = 1.f
+            .position = {2.f, -1.f, 0.f},
+            .color = {0.858f, 0.361f, 0.086f},
+            .intensity = 3.f
         });
 
         // ECS systems initialization
@@ -114,6 +114,8 @@ namespace mnm
             shader->SetUniform("ambient", math::Vec3f{1.f});
             shader->SetUniform("diffuse", math::Vec3f{1.f});
             shader->SetUniform("specular", math::Vec3f{1.f});
+
+            shader->SetUniform("viewPosition", gCoordinator.GetComponent<ecs::Camera>(camera).position);
             
             // Render frame
             renderer->BeginFrame(window.GetSize());
