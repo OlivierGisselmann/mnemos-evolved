@@ -17,6 +17,8 @@ This project exists because I wanted to learn how a modern game engine works beh
 - Low-level rendering (OpenGL, will add Vulkan/DX12 later)
 - Modular design with extensibility in mind
 
+![Turn](resources/screenshots/turn.gif)
+
 ### List of features (WIP)
 - [x] CMake cross-platform project structure
 - [x] Engine subsystems
@@ -41,9 +43,9 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [x] Renderer API abstraction
         - [x] Mesh rendering
         - [x] Material system
-        - [ ] Camera (projection, orthogonal)
-        - [ ] Lighting models
-            - [ ] Phong
+        - [x] Camera (projection, orthogonal)
+        - [x] Lighting models
+            - [x] Phong
             - [ ] PBR
         - [ ] Deferred renderer
         - [ ] Post processing
