@@ -35,14 +35,9 @@ namespace mnm::ecs
             model = math::RotateY(model, transform.rotation.y);
             model = math::Scale(model, transform.scale);
 
-            view = math::LookAt(math::Vec3f{-30.f, 10.f, -10.f}, math::Vec3f{0.f, 0.f, 0.f}, math::Vec3f{0.f, 1.f, 0.f});
-            projection = math::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
-
             // Set uniforms
             mShader->Use();
             mShader->SetUniform("model", model);
-            mShader->SetUniform("view", view);
-            mShader->SetUniform("projection", projection);
             
             // Draw call
             renderable.mesh->Draw();

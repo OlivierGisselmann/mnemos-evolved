@@ -28,6 +28,9 @@ add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/debug/debug.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/platform/input/input.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/renderer_factory.cpp
+
+    # ECS
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/ecs/systems/camera_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/ecs/systems/render_system.cpp
 
     # OpenGL specific

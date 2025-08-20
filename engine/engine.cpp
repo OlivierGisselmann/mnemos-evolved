@@ -3,8 +3,7 @@
 #include <core/logging/log.hpp>
 #include <core/timer/timer.hpp>
 #include <ecs/core/coordinator.hpp>
-#include <ecs/components/renderable.hpp>
-#include <ecs/components/transform.hpp>
+#include <ecs/systems/camera_system.hpp>
 #include <ecs/systems/render_system.hpp>
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
@@ -32,6 +31,7 @@ namespace mnm
 
         // ECS initialization
         gCoordinator.Init();
+        gCoordinator.RegisterComponent<ecs::Camera>();
         gCoordinator.RegisterComponent<ecs::Renderable>();
         gCoordinator.RegisterComponent<ecs::Transform>();
 
@@ -41,6 +41,13 @@ namespace mnm
             signature.set(gCoordinator.GetComponentType<ecs::Renderable>());
             signature.set(gCoordinator.GetComponentType<ecs::Transform>());
             gCoordinator.SetSystemSignature<ecs::RenderSystem>(signature);
+        }
+
+        auto cameraSystem = gCoordinator.RegisterSystem<ecs::CameraSystem>();
+        {
+            ecs::Signature signature;
+            signature.set(gCoordinator.GetComponentType<ecs::Camera>());
+            gCoordinator.SetSystemSignature<ecs::CameraSystem>(signature);
         }
 
         // Entity initialization
@@ -59,17 +66,24 @@ namespace mnm
             gCoordinator.AddComponent(entity, ecs::Renderable{"../../resources/models/bunny.obj"});
         }
 
+        // Camera setup
+        auto camera = gCoordinator.CreateEntity();
+        gCoordinator.AddComponent(camera, ecs::Camera{});
+
         renderSystem->Init(shader);
+        cameraSystem->Init(shader);
 
         app->OnInit();
 
+        /* MAIN LOOP */
         u64 accumulator = 0;
         while(!window.CloseRequested() && !sUserSideStop)
         {
             window.PollEvents();
 
             timer::UpdateTimer();
-            app->OnUpdate((float)(timer::GetDeltaTime() / 1e9));
+            auto deltaTimeInSeconds = timer::GetDeltaTime() / 1e9;
+            app->OnUpdate((float)(deltaTimeInSeconds));
 
             for(auto& entity : entities)
             {
@@ -78,7 +92,7 @@ namespace mnm
                 gCoordinator.GetComponent<ecs::Transform>(entity).rotation.z += (float)(std::rand() % 3);
             }
 
-            // Fixed timestep update
+            /* FIXED TIMESTEP UPDATE */
             accumulator += timer::GetDeltaTime();
             while(accumulator > 1.0 / (FIXED_UPDATE_RATE / 1e9))
             {
@@ -88,10 +102,11 @@ namespace mnm
             
             // Render frame
             renderer->BeginFrame(window.GetSize());
-            renderer->DrawFrame(timer::GetDeltaTime() / 1e9);
+            renderer->DrawFrame(deltaTimeInSeconds);
             renderer->EndFrame();
 
-            renderSystem->Update(timer::GetDeltaTime() / 1e9);
+            cameraSystem->Update(deltaTimeInSeconds, window.GetSize());
+            renderSystem->Update(deltaTimeInSeconds);
 
             window.SwapWindowBuffers();
             input::UpdateInputState();
