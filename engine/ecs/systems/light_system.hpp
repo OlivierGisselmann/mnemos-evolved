@@ -1,20 +1,18 @@
-#ifndef RENDER_SYSTEM_HPP
-#define RENDER_SYSTEM_HPP
+#ifndef LIGHT_SYSTEM_HPP
+#define LIGHT_SYSTEM_HPP
 
-#include <core/parsers/obj_parser.hpp>
 #include <ecs/core/coordinator.hpp>
-#include <ecs/components/renderable.hpp>
-#include <ecs/components/transform.hpp>
+#include <ecs/components/light.hpp>
 #include <renderer/opengl/shader.hpp>
 
 namespace mnm::ecs
 {
-    class RenderSystem : public System
+    class LightSystem : public System
     {
     public:
         void Init(std::shared_ptr<renderer::opengl::Shader> shader);
 
-        void Update(f32 deltaTime);
+        void Update();
 
     private:
         std::shared_ptr<renderer::opengl::Shader> mShader;

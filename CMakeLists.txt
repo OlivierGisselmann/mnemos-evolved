@@ -31,6 +31,7 @@ add_library(${PROJECT_NAME} SHARED
 
     # ECS
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/ecs/systems/camera_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/ecs/systems/light_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/ecs/systems/render_system.cpp
 
     # OpenGL specific

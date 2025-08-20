@@ -1,5 +1,5 @@
-#ifndef CAMERA_COMPONENT_HPP
-#define CAMERA_COMPONENT_HPP
+#ifndef COMPONENT_CAMERA_HPP
+#define COMPONENT_CAMERA_HPP
 
 #include <math/matrix.hpp>
 

@@ -4,6 +4,7 @@
 #include <core/timer/timer.hpp>
 #include <ecs/core/coordinator.hpp>
 #include <ecs/systems/camera_system.hpp>
+#include <ecs/systems/light_system.hpp>
 #include <ecs/systems/render_system.hpp>
 #include <platform/window/window.hpp>
 #include <renderer/renderer_factory.hpp>
@@ -32,6 +33,7 @@ namespace mnm
         // ECS initialization
         gCoordinator.Init();
         gCoordinator.RegisterComponent<ecs::Camera>();
+        gCoordinator.RegisterComponent<ecs::DirectionalLight>();
         gCoordinator.RegisterComponent<ecs::Renderable>();
         gCoordinator.RegisterComponent<ecs::Transform>();
 
@@ -50,24 +52,40 @@ namespace mnm
             gCoordinator.SetSystemSignature<ecs::CameraSystem>(signature);
         }
 
+        auto lightSystem = gCoordinator.RegisterSystem<ecs::LightSystem>();
+        {
+            ecs::Signature signature;
+            signature.set(gCoordinator.GetComponentType<ecs::DirectionalLight>());
+            gCoordinator.SetSystemSignature<ecs::LightSystem>(signature);
+        }
+
         // Model entity
         auto model = gCoordinator.CreateEntity();
         gCoordinator.AddComponent(model, ecs::Transform
         {
-            .position = {0.f},
+            .position = {0.f, -0.5f, 0.f},
             .rotation = {0.f},
-            .scale = {.01f}
+            .scale = {1.f}
         });
-        gCoordinator.AddComponent(model, ecs::Renderable{"../../resources/models/sponza.obj"});
+        gCoordinator.AddComponent(model, ecs::Renderable{"../../resources/models/bunny.obj"});
 
         // Camera entity
         auto camera = gCoordinator.CreateEntity();
         gCoordinator.AddComponent(camera, ecs::Camera{});
-        gCoordinator.GetComponent<ecs::Camera>(camera).position = {0.f, -50.f, -50.f};
+        gCoordinator.GetComponent<ecs::Camera>(camera).position = {0.f, 0.f, -5.f};
+
+        // Light entity
+        auto light = gCoordinator.CreateEntity();
+        gCoordinator.AddComponent(light, ecs::DirectionalLight{
+            .position = {0.f, 3.f, 0.f},
+            .color = {1.f, 0.f, 0.f},
+            .intensity = 1.f
+        });
 
         // ECS systems initialization
         renderSystem->Init(shader);
         cameraSystem->Init(shader);
+        lightSystem->Init(shader);
 
         app->OnInit();
 
@@ -91,7 +109,11 @@ namespace mnm
             {
                 app->OnFixedUpdate();
                 accumulator -= 1.0 / (FIXED_UPDATE_RATE / 1e9);
-            }     
+            }
+
+            shader->SetUniform("ambient", math::Vec3f{1.f});
+            shader->SetUniform("diffuse", math::Vec3f{1.f});
+            shader->SetUniform("specular", math::Vec3f{1.f});
             
             // Render frame
             renderer->BeginFrame(window.GetSize());
@@ -101,6 +123,7 @@ namespace mnm
             // Update ECS systems
             cameraSystem->Update(deltaTimeInSeconds, window.GetSize());
             renderSystem->Update(deltaTimeInSeconds);
+            lightSystem->Update();
 
             window.SwapWindowBuffers();
             input::UpdateInputState();
