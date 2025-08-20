@@ -16,7 +16,7 @@ namespace mnm::ecs
             auto& camera = gCoordinator.GetComponent<Camera>(entity);
 
             camera.projectionMatrix = math::Perspective(45.0f, (float)windowSize.x / (float)windowSize.y, 0.1f, 100.0f);
-            camera.viewMatrix = math::LookAt(math::Vec3f{-30.f, 10.f, -10.f}, math::Vec3f{0.f, 0.f, 0.f}, math::Vec3f{0.f, 1.f, 0.f});
+            camera.viewMatrix = math::LookAt(camera.position, math::Vec3f{0.f, 0.f, 0.f}, math::Vec3f{0.f, 1.f, 0.f});
 
             mShader->Use();
             mShader->SetUniform("view", camera.viewMatrix);

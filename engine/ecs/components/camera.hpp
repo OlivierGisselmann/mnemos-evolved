@@ -7,6 +7,7 @@ namespace mnm::ecs
 {
     struct Camera
     {
+        math::Vec3f position;
         math::Mat4f viewMatrix;
         math::Mat4f projectionMatrix;
     };
