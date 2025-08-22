@@ -5,8 +5,12 @@ in vec3 fPosition;
 in vec2 fTexCoords;
 
 uniform vec3 lightColor;
-uniform vec3 lightDirection;
+uniform vec3 lightPosition;
 uniform float lightIntensity;
+
+uniform float lightConstant;
+uniform float lightLinear;
+uniform float lightQuadratic;
 
 uniform vec3 viewPosition;
 
@@ -25,7 +29,7 @@ void main()
 
     // Diffuse
     vec3 norm = normalize(fNormal);
-    vec3 lightDir = normalize(-lightDirection);
+    vec3 lightDir = normalize(-lightPosition - fPosition);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diffuseColor * diff;
 
@@ -35,10 +39,14 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), specularStrength);
     vec3 specular = specularColor * spec * 0.5;
 
+    // Attenuation
+    float distance = length(lightPosition - fPosition);
+    float attenuation = 1.0 / (lightConstant + lightLinear * distance + lightQuadratic * (distance * distance));  
+
     // Result
-    vec3 result = (ambient + diffuse + specular) * lightColor * lightIntensity;
+    vec3 result = (ambient + diffuse + specular) * attenuation * lightColor * lightIntensity;
 
     // Gamma correction
     fragColor = vec4(result, 1.0);
-    fragColor.rgb = pow(fragColor.rgb, vec3(1.0/2.2));
+    //fragColor.rgb = pow(fragColor.rgb, vec3(1.0/2.2));
 }

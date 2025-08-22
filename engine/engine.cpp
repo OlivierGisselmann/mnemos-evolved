@@ -33,7 +33,7 @@ namespace mnm
         // ECS initialization
         gCoordinator.Init();
         gCoordinator.RegisterComponent<ecs::Camera>();
-        gCoordinator.RegisterComponent<ecs::DirectionalLight>();
+        gCoordinator.RegisterComponent<ecs::PointLight>();
         gCoordinator.RegisterComponent<ecs::PhongMaterial>();
         gCoordinator.RegisterComponent<ecs::Renderable>();
         gCoordinator.RegisterComponent<ecs::Transform>();
@@ -57,7 +57,7 @@ namespace mnm
         auto lightSystem = gCoordinator.RegisterSystem<ecs::LightSystem>();
         {
             ecs::Signature signature;
-            signature.set(gCoordinator.GetComponentType<ecs::DirectionalLight>());
+            signature.set(gCoordinator.GetComponentType<ecs::PointLight>());
             gCoordinator.SetSystemSignature<ecs::LightSystem>(signature);
         }
 
@@ -84,10 +84,10 @@ namespace mnm
 
         // Light entity
         auto light = gCoordinator.CreateEntity();
-        gCoordinator.AddComponent(light, ecs::DirectionalLight{
-            .direction = {0.3f, 0.f, -1.f},
+        gCoordinator.AddComponent(light, ecs::PointLight{
+            .position = {10.f, 0.f, -1.f},
             .color = {1.f},
-            .intensity = 1.f
+            .intensity = 0.3f
         });
 
         // ECS systems initialization
