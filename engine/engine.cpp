@@ -28,7 +28,7 @@ namespace mnm
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
         renderer->Initialize();
 
-        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/test.vert", "../../resources/shaders/test.frag");
+        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/phong.vert", "../../resources/shaders/phong.frag");
 
         // ECS initialization
         gCoordinator.Init();
@@ -71,10 +71,10 @@ namespace mnm
         });
         gCoordinator.AddComponent(model, ecs::Renderable{"../../resources/models/bunny.obj"});
         gCoordinator.AddComponent(model, ecs::PhongMaterial{
-            .ambient = {1.f},
-            .diffuse = {1.f},
-            .specular = {1.f},
-            .specularStrength = 32.f
+            .ambient = {0.9215f, 0.4039f, 0.6274f},
+            .diffuse = {0.9215f, 0.4039f, 0.6274f},
+            .specular = {0.9215f, 0.4039f, 0.6274f},
+            .specularStrength = 256.f
         });
 
         // Camera entity
@@ -85,9 +85,9 @@ namespace mnm
         // Light entity
         auto light = gCoordinator.CreateEntity();
         gCoordinator.AddComponent(light, ecs::DirectionalLight{
-            .position = {3.f, -1.f, 1.f},
-            .color = {0.858f, 0.361f, 0.086f},
-            .intensity = 1.5f
+            .direction = {0.3f, 0.f, -1.f},
+            .color = {1.f},
+            .intensity = 1.f
         });
 
         // ECS systems initialization

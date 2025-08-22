@@ -5,7 +5,7 @@ in vec3 fPosition;
 in vec2 fTexCoords;
 
 uniform vec3 lightColor;
-uniform vec3 lightPosition;
+uniform vec3 lightDirection;
 uniform float lightIntensity;
 
 uniform vec3 viewPosition;
@@ -25,7 +25,7 @@ void main()
 
     // Diffuse
     vec3 norm = normalize(fNormal);
-    vec3 lightDir = normalize(lightPosition - fPosition);
+    vec3 lightDir = normalize(-lightDirection);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diffuseColor * diff;
 

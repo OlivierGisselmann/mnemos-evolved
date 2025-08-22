@@ -18,7 +18,7 @@ namespace mnm::ecs
             mShader->Use();
             mShader->SetUniform("lightColor", light.color);
             mShader->SetUniform("lightIntensity", light.intensity);
-            mShader->SetUniform("lightPosition", light.position);
+            mShader->SetUniform("lightDirection", light.direction);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace mnm::ecs
 {
     struct DirectionalLight
     {
-        math::Vec3f position;
+        math::Vec3f direction;
         math::Vec3f color {1.f, 1.f, 1.f};
         f32 intensity = 1.f;
     };
