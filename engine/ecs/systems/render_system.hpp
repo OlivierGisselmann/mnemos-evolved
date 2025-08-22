@@ -3,6 +3,7 @@
 
 #include <core/parsers/obj_parser.hpp>
 #include <ecs/core/coordinator.hpp>
+#include <ecs/components/material.hpp>
 #include <ecs/components/renderable.hpp>
 #include <ecs/components/transform.hpp>
 #include <renderer/opengl/shader.hpp>

@@ -21,12 +21,12 @@ namespace mnm::ecs
     {
         for(const auto& entity : mEntities)
         {
+            // Get entity's components
             const auto& transform = gCoordinator.GetComponent<Transform>(entity);
             const auto& renderable = gCoordinator.GetComponent<Renderable>(entity);
+            const auto& material = gCoordinator.GetComponent<PhongMaterial>(entity);
 
             math::Mat4f model;
-            math::Mat4f view;
-            math::Mat4f projection;
 
             // Apply transform
             model = math::Translate(model, transform.position);
@@ -38,6 +38,11 @@ namespace mnm::ecs
             // Set uniforms
             mShader->Use();
             mShader->SetUniform("model", model);
+
+            mShader->SetUniform("ambientColor", material.ambient);
+            mShader->SetUniform("diffuseColor", material.diffuse);
+            mShader->SetUniform("specularColor", material.specular);
+            mShader->SetUniform("specularStrength", material.specularStrength);
             
             // Draw call
             renderable.mesh->Draw();
