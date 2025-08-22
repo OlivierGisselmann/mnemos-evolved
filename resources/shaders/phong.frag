@@ -37,5 +37,8 @@ void main()
 
     // Result
     vec3 result = (ambient + diffuse + specular) * lightColor * lightIntensity;
+
+    // Gamma correction
     fragColor = vec4(result, 1.0);
+    fragColor.rgb = pow(fragColor.rgb, vec3(1.0/2.2));
 }
