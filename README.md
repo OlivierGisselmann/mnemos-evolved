@@ -43,12 +43,23 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [x] Renderer API abstraction
         - [x] Mesh rendering
         - [x] Material system
+            - [x] Multiple texture support
         - [x] Camera (projection, orthogonal)
         - [x] Lighting models
             - [x] Phong
             - [ ] PBR
+        - [x] Rendering techniques
+            - [ ] Image Based Lighting
+            - [ ] Shadow mapping
+        - [ ] Anti aliasing
+            - [ ] MSAA
+            - [ ] FXAA
+            - [ ] TAA
         - [ ] Deferred renderer
-        - [ ] Post processing
+        - [x] Post processing
+            - [x] Gamma correction
+            - [ ] Tone mapping
+            - [ ] Bloom
     - [x] ECS
         - [x] Entity
         - [x] Components
