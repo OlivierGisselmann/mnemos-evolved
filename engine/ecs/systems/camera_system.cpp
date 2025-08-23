@@ -21,6 +21,7 @@ namespace mnm::ecs
             mShader->Use();
             mShader->SetUniform("view", camera.viewMatrix);
             mShader->SetUniform("projection", camera.projectionMatrix);
+            mShader->SetUniform("viewPosition", camera.position);
         }
     }
 }
