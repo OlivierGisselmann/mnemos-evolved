@@ -17,7 +17,7 @@ namespace mnm::renderer::opengl
 
         if(data.IsValid())
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, data.width, data.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data.pixels.data());
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, data.width, data.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data.pixels.data());
             glGenerateMipmap(GL_TEXTURE_2D);
         }
     }

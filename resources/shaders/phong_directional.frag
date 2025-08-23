@@ -43,5 +43,6 @@ void main()
 
     // Gamma correction
     fragColor = vec4(result, 1.0) * texture(albedoTexture, fTexCoords);
-    //fragColor.rgb = pow(fragColor.rgb, vec3(1.0/2.2));
+    float gamma = 2.2;
+    fragColor.rgb = pow(fragColor.rgb, vec3(gamma));
 }
