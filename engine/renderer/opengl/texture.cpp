@@ -24,13 +24,9 @@ namespace mnm::renderer::opengl
 
     Texture::~Texture() {}
 
-    u32 Texture::GetID() const
+    void Texture::Bind(u32 slot) const
     {
-        return mID;
-    }
-
-    void Texture::Bind() const
-    {
+        glActiveTexture(GL_TEXTURE0 + slot);
         glBindTexture(GL_TEXTURE_2D, mID);
     }
 }

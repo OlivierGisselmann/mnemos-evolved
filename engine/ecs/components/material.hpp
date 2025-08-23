@@ -2,6 +2,7 @@
 #define COMPONENT_MATERIAL_HPP
 
 #include <math/vector.hpp>
+#include <renderer/opengl/texture.hpp>
 
 namespace mnm::ecs
 {
@@ -11,6 +12,9 @@ namespace mnm::ecs
         math::Vec3f diffuse {1.f};
         math::Vec3f specular {1.f};
         f32 specularStrength {32.f};
+
+        renderer::opengl::Texture albedoMap {"../../resources/textures/texture.bmp"}; //Default texture's location
+        renderer::opengl::Texture specularMap {"../../resources/textures/texture.bmp"}; //Default texture's location
     };
 }
 

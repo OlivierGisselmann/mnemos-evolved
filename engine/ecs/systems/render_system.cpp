@@ -43,6 +43,12 @@ namespace mnm::ecs
             mShader->SetUniform("diffuseColor", material.diffuse);
             mShader->SetUniform("specularColor", material.specular);
             mShader->SetUniform("specularStrength", material.specularStrength);
+
+            // Texture mapping
+            material.albedoMap.Bind(0);
+            mShader->SetUniform("albedoTexture", 0);
+            material.specularMap.Bind(1);
+            mShader->SetUniform("specularTexture", 1);
             
             // Draw call
             renderable.mesh->Draw();

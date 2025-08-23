@@ -2,7 +2,6 @@
 #define MESH_HPP
 
 #include <renderer/opengl/vertex_array.hpp>
-#include <renderer/opengl/texture.hpp>
 
 namespace mnm::renderer::opengl
 {
@@ -16,7 +15,6 @@ namespace mnm::renderer::opengl
 
     private:
         VertexArray mVAO;
-        Texture mTexture;
     };
 }
 

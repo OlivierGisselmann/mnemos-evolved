@@ -28,11 +28,12 @@ namespace mnm
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
         renderer->Initialize();
 
-        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/phong.vert", "../../resources/shaders/phong.frag");
+        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/phong.vert", "../../resources/shaders/phong_directional.frag");
 
         // ECS initialization
         gCoordinator.Init();
         gCoordinator.RegisterComponent<ecs::Camera>();
+        gCoordinator.RegisterComponent<ecs::DirectionalLight>();
         gCoordinator.RegisterComponent<ecs::PointLight>();
         gCoordinator.RegisterComponent<ecs::PhongMaterial>();
         gCoordinator.RegisterComponent<ecs::Renderable>();
@@ -57,7 +58,8 @@ namespace mnm
         auto lightSystem = gCoordinator.RegisterSystem<ecs::LightSystem>();
         {
             ecs::Signature signature;
-            signature.set(gCoordinator.GetComponentType<ecs::PointLight>());
+            signature.set(gCoordinator.GetComponentType<ecs::DirectionalLight>());
+            //signature.set(gCoordinator.GetComponentType<ecs::PointLight>());
             gCoordinator.SetSystemSignature<ecs::LightSystem>(signature);
         }
 
@@ -74,7 +76,9 @@ namespace mnm
             .ambient = {0.9215f, 0.4039f, 0.6274f},
             .diffuse = {0.9215f, 0.4039f, 0.6274f},
             .specular = {0.9215f, 0.4039f, 0.6274f},
-            .specularStrength = 256.f
+            .specularStrength = 32.f,
+            .albedoMap = {"../../resources/textures/texture.bmp"},
+            .specularMap = {"../../resources/textures/shrek.bmp"}
         });
 
         // Camera entity
@@ -84,11 +88,16 @@ namespace mnm
 
         // Light entity
         auto light = gCoordinator.CreateEntity();
-        gCoordinator.AddComponent(light, ecs::PointLight{
-            .position = {10.f, 0.f, -1.f},
+        gCoordinator.AddComponent(light, ecs::DirectionalLight{
+            .direction = {1.f, 0.f, -1.f},
             .color = {1.f},
-            .intensity = 0.3f
+            .intensity = 1.f
         });
+        //gCoordinator.AddComponent(light, ecs::PointLight{
+        //    .position = {0.f, 0.f, -1.f},
+        //    .color = {1.f},
+        //    .intensity = 0.3f
+        //});
 
         // ECS systems initialization
         renderSystem->Init(shader);

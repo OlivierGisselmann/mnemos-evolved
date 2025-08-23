@@ -12,12 +12,10 @@ namespace mnm::renderer::opengl
     class Texture
     {
     public:
-        Texture(const std::string& path);
+        Texture(const std::string& path = "");
         ~Texture();
 
-        void Bind() const;
-
-        u32 GetID() const;
+        void Bind(u32 slot = 0) const;
 
     private:
         u32 mID;
