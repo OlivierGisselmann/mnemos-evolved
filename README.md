@@ -47,7 +47,7 @@ This project exists because I wanted to learn how a modern game engine works beh
         - [x] Camera (projection, orthogonal)
         - [x] Lighting models
             - [x] Phong
-            - [ ] PBR
+            - [x] PBR
         - [x] Rendering techniques
             - [ ] Image Based Lighting
             - [ ] Shadow mapping
