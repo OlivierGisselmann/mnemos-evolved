@@ -41,6 +41,7 @@ add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/shader.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/texture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/mesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/renderer/opengl/framebuffer.cpp
 )
 
 # Enable symbol export for .DLL
