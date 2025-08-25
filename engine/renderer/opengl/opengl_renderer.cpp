@@ -1,9 +1,5 @@
 #include <renderer/opengl/opengl_renderer.hpp>
 
-#include <renderer/opengl/mesh.hpp>
-#include <renderer/opengl/shader.hpp>
-#include <core/parsers/obj_parser.hpp>
-
 namespace mnm::renderer::opengl
 {
     void OpenGLRenderer::Initialize()
