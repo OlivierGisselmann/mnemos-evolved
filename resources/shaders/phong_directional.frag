@@ -42,7 +42,7 @@ void main()
     vec3 result = (ambient + diffuse + specular) * lightColor * lightIntensity;
 
     // Gamma correction
-    fragColor = vec4(result, 1.0) * texture(albedoTexture, fTexCoords);
+    fragColor = vec4(result, 1.0);
     float gamma = 2.2;
     fragColor.rgb = pow(fragColor.rgb, vec3(gamma));
 }

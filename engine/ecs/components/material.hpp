@@ -16,6 +16,14 @@ namespace mnm::ecs
         renderer::opengl::Texture albedoMap {"../../resources/textures/texture.bmp"}; //Default texture's location
         renderer::opengl::Texture specularMap {"../../resources/textures/texture.bmp"}; //Default texture's location
     };
+
+    struct PBRMaterial
+    {
+        math::Vec3f albedo {1.f};
+        f32 metallic = 0.f;
+        f32 roughness = 0.f;
+        f32 ao = 0.f;
+    };
 }
 
 #endif

@@ -24,7 +24,8 @@ namespace mnm::ecs
             // Get entity's components
             const auto& transform = gCoordinator.GetComponent<Transform>(entity);
             const auto& renderable = gCoordinator.GetComponent<Renderable>(entity);
-            const auto& material = gCoordinator.GetComponent<PhongMaterial>(entity);
+            //const auto& material = gCoordinator.GetComponent<PhongMaterial>(entity);
+            const auto& material = gCoordinator.GetComponent<PBRMaterial>(entity);
 
             math::Mat4f model;
 
@@ -39,16 +40,23 @@ namespace mnm::ecs
             mShader->Use();
             mShader->SetUniform("model", model);
 
-            mShader->SetUniform("ambientColor", material.ambient);
-            mShader->SetUniform("diffuseColor", material.diffuse);
-            mShader->SetUniform("specularColor", material.specular);
-            mShader->SetUniform("specularStrength", material.specularStrength);
+            // Phong material
+            //mShader->SetUniform("ambientColor", material.ambient);
+            //mShader->SetUniform("diffuseColor", material.diffuse);
+            //mShader->SetUniform("specularColor", material.specular);
+            //mShader->SetUniform("specularStrength", material.specularStrength);
+
+            // PBR material
+            mShader->SetUniform("albedo", material.albedo);
+            mShader->SetUniform("metallic", material.metallic);
+            mShader->SetUniform("roughness", material.roughness);
+            mShader->SetUniform("ao", material.ao);
 
             // Texture mapping
-            material.albedoMap.Bind(0);
-            mShader->SetUniform("albedoTexture", 0);
-            material.specularMap.Bind(1);
-            mShader->SetUniform("specularTexture", 1);
+            //material.albedoMap.Bind(0);
+            //mShader->SetUniform("albedoTexture", 0);
+            //material.specularMap.Bind(1);
+            //mShader->SetUniform("specularTexture", 1);
             
             // Draw call
             renderable.mesh->Draw();

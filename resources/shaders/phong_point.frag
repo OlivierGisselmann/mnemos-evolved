@@ -34,13 +34,13 @@ void main()
     vec3 norm = normalize(fNormal);
     vec3 lightDir = normalize(-lightPosition - fPosition);
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diffuseColor * diff;
+    vec3 diffuse = diffuseColor * diff * vec3(texture(albedoTexture, fTexCoords));
 
     // Specular
     vec3 viewDir = normalize(fPosition - viewPosition);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), specularStrength);
-    vec3 specular = specularColor * spec * 0.5;
+    vec3 specular = specularColor * spec * 0.5 * vec3(texture(specularTexture, fTexCoords));
 
     // Attenuation
     float distance = length(lightPosition - fPosition);

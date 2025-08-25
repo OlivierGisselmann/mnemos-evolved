@@ -28,13 +28,14 @@ namespace mnm
         auto renderer = renderer::CreateRenderer(renderer::RendererBackend::OpenGL);
         renderer->Initialize();
 
-        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/phong.vert", "../../resources/shaders/phong_point.frag");
+        auto shader = std::make_shared<renderer::opengl::Shader>("../../resources/shaders/base.vert", "../../resources/shaders/pbr.frag");
 
         // ECS initialization
         gCoordinator.Init();
         gCoordinator.RegisterComponent<ecs::Camera>();
         gCoordinator.RegisterComponent<ecs::DirectionalLight>();
         gCoordinator.RegisterComponent<ecs::PointLight>();
+        gCoordinator.RegisterComponent<ecs::PBRMaterial>();
         gCoordinator.RegisterComponent<ecs::PhongMaterial>();
         gCoordinator.RegisterComponent<ecs::Renderable>();
         gCoordinator.RegisterComponent<ecs::Transform>();
@@ -42,7 +43,7 @@ namespace mnm
         auto renderSystem = gCoordinator.RegisterSystem<ecs::RenderSystem>();
         {
             ecs::Signature signature;
-            signature.set(gCoordinator.GetComponentType<ecs::PhongMaterial>());
+            signature.set(gCoordinator.GetComponentType<ecs::PBRMaterial>());
             signature.set(gCoordinator.GetComponentType<ecs::Renderable>());
             signature.set(gCoordinator.GetComponentType<ecs::Transform>());
             gCoordinator.SetSystemSignature<ecs::RenderSystem>(signature);
@@ -58,71 +59,44 @@ namespace mnm
         auto lightSystem = gCoordinator.RegisterSystem<ecs::LightSystem>();
         {
             ecs::Signature signature;
-            //signature.set(gCoordinator.GetComponentType<ecs::DirectionalLight>());
-            signature.set(gCoordinator.GetComponentType<ecs::PointLight>());
+            signature.set(gCoordinator.GetComponentType<ecs::DirectionalLight>());
+            //signature.set(gCoordinator.GetComponentType<ecs::PointLight>());
             gCoordinator.SetSystemSignature<ecs::LightSystem>(signature);
         }
 
         // Model entity
-        std::vector<ecs::Entity> models;
-
-        for(int i = 0; i < 10; ++i)
+        auto model = gCoordinator.CreateEntity();
+        gCoordinator.AddComponent(model, ecs::Transform
         {
-            auto ent = gCoordinator.CreateEntity();
-
-            gCoordinator.AddComponent(ent, ecs::Transform
-            {
-                .position = {-5.f + i, -0.7f, 0.f},
-                .rotation = {0.f},
-                .scale = {.8f}
-            });
-            gCoordinator.AddComponent(ent, ecs::Renderable{"../../resources/models/bunny.obj"});
-            gCoordinator.AddComponent(ent, ecs::PhongMaterial{
-                .ambient = {0.9215f, 0.4039f, 0.6274f},
-                .diffuse = {0.9215f, 0.4039f, 0.6274f},
-                .specular = {0.9215f, 0.4039f, 0.6274f},
-                .specularStrength = 32.f,
-                .albedoMap = {"../../resources/textures/texture.bmp"},
-                .specularMap = {"../../resources/textures/shrek.bmp"}
-            });
-
-            models.push_back(ent);
-        }
-
-        //auto model = gCoordinator.CreateEntity();
-        //gCoordinator.AddComponent(model, ecs::Transform
-        //{
-        //    .position = {0.f, -0.7f, 0.f},
-        //    .rotation = {0.f},
-        //    .scale = {1.f}
-        //});
-        //gCoordinator.AddComponent(model, ecs::Renderable{"../../resources/models/bunny.obj"});
-        //gCoordinator.AddComponent(model, ecs::PhongMaterial{
-        //    .ambient = {0.9215f, 0.4039f, 0.6274f},
-        //    .diffuse = {0.9215f, 0.4039f, 0.6274f},
-        //    .specular = {0.9215f, 0.4039f, 0.6274f},
-        //    .specularStrength = 32.f,
-        //    .albedoMap = {"../../resources/textures/wood.bmp"},
-        //    .specularMap = {"../../resources/textures/shrek.bmp"}
-        //});
+            .position = {0.f, -0.7f, 0.f},
+            .rotation = {0.f},
+            .scale = {.8f}
+        });
+        gCoordinator.AddComponent(model, ecs::Renderable{"../../resources/models/bunny.obj"});
+        gCoordinator.AddComponent(model, ecs::PBRMaterial{
+            .albedo = {(10.f / 256.f), (100.f / 256.f), (150.f / 256.f)},
+            .metallic = 0.1f,
+            .roughness = 0.2f,
+            .ao = 0.0f
+        });
 
         // Camera entity
         auto camera = gCoordinator.CreateEntity();
         gCoordinator.AddComponent(camera, ecs::Camera{});
-        gCoordinator.GetComponent<ecs::Camera>(camera).position = {0.f, 0.f, -8.f};
+        gCoordinator.GetComponent<ecs::Camera>(camera).position = {0.f, 0.f, -2.3f};
 
         // Light entity
         auto light = gCoordinator.CreateEntity();
-        //gCoordinator.AddComponent(light, ecs::DirectionalLight{
-        //    .direction = {1.f, 0.f, -1.f},
+        gCoordinator.AddComponent(light, ecs::DirectionalLight{
+            .direction = {1.f, 0.f, -1.f},
+            .color = {1.f},
+            .intensity = 1.3f
+        });
+        //gCoordinator.AddComponent(light, ecs::PointLight{
+        //    .position = {0.f, -1.f, -2.f},
         //    .color = {1.f},
         //    .intensity = 1.f
         //});
-        gCoordinator.AddComponent(light, ecs::PointLight{
-            .position = {0.f, -1.f, -1.f},
-            .color = {1.f},
-            .intensity = 1.f
-        });
 
         // ECS systems initialization
         renderSystem->Init(shader);
@@ -143,10 +117,7 @@ namespace mnm
             app->OnUpdate((float)(deltaTimeInSeconds));
 
             // Rotate model
-            for(auto& model : models)
-            {
-            gCoordinator.GetComponent<ecs::Transform>(model).rotation += {0.f, deltaTimeInSeconds * 10.0f, 0.f};
-            }
+            gCoordinator.GetComponent<ecs::Transform>(model).rotation += {0.f, deltaTimeInSeconds * 15.0f, 0.f};
 
             /* FIXED TIMESTEP UPDATE */
             accumulator += timer::GetDeltaTime();
